@@ -149,8 +149,8 @@ int main(void)
     const GLuint TextureID = glGetUniformLocation(programID, "myTextureSampler");
 
 
-    static GLfloat* g_particule_position_size_data = new GLfloat[MaxParticles * 4];
-    static GLubyte* g_particule_color_data = new GLubyte[MaxParticles * 4];
+    static auto g_particule_position_size_data = new GLfloat[MaxParticles * 4];
+    static auto g_particule_color_data = new GLubyte[MaxParticles * 4];
 
     for (int i = 0; i < MaxParticles; i++)
     {
@@ -230,11 +230,11 @@ int main(void)
             ParticlesContainer[particleIndex].pos = glm::vec3(0, 0, -20.0f);
 
             float spread = 1.5f;
-            glm::vec3 maindir = glm::vec3(0.0f, 10.0f, 0.0f);
+            auto maindir = glm::vec3(0.0f, 10.0f, 0.0f);
             // Very bad way to generate a random direction;
             // See for instance http://stackoverflow.com/questions/5408276/python-uniform-spherical-distribution instead,
             // combined with some user-controlled parameters (main direction, spread, etc)
-            glm::vec3 randomdir = glm::vec3(
+            auto randomdir = glm::vec3(
                 (rand() % 2000 - 1000.0f) / 1000.0f,
                 (rand() % 2000 - 1000.0f) / 1000.0f,
                 (rand() % 2000 - 1000.0f) / 1000.0f
@@ -257,9 +257,7 @@ int main(void)
         int ParticlesCount = 0;
         for (int i = 0; i < MaxParticles; i++)
         {
-            Particle& p = ParticlesContainer[i]; // shortcut
-
-            if (p.life > 0.0f)
+            if (Particle& p = ParticlesContainer[i]; p.life > 0.0f)
             {
                 // Decrease life
                 p.life -= delta;

@@ -102,9 +102,8 @@ bool TestRayOBBIntersection(
 	{
 		glm::vec3 xaxis(ModelMatrix[0].x, ModelMatrix[0].y, ModelMatrix[0].z);
 		float e = glm::dot(xaxis, delta);
-		float f = glm::dot(ray_direction, xaxis);
 
-		if ( fabs(f) > 0.001f ){ // Standard case
+		if (float f = glm::dot(ray_direction, xaxis); fabs(f) > 0.001f ){ // Standard case
 
 			float t1 = (e+aabb_min.x)/f; // Intersection with the "left" plane
 			float t2 = (e+aabb_max.x)/f; // Intersection with the "right" plane
@@ -141,9 +140,8 @@ bool TestRayOBBIntersection(
 	{
 		glm::vec3 yaxis(ModelMatrix[1].x, ModelMatrix[1].y, ModelMatrix[1].z);
 		float e = glm::dot(yaxis, delta);
-		float f = glm::dot(ray_direction, yaxis);
 
-		if ( fabs(f) > 0.001f ){
+		if (float f = glm::dot(ray_direction, yaxis); fabs(f) > 0.001f ){
 
 			float t1 = (e+aabb_min.y)/f;
 			float t2 = (e+aabb_max.y)/f;
@@ -169,9 +167,8 @@ bool TestRayOBBIntersection(
 	{
 		glm::vec3 zaxis(ModelMatrix[2].x, ModelMatrix[2].y, ModelMatrix[2].z);
 		float e = glm::dot(zaxis, delta);
-		float f = glm::dot(ray_direction, zaxis);
 
-		if ( fabs(f) > 0.001f ){
+		if (float f = glm::dot(ray_direction, zaxis); fabs(f) > 0.001f ){
 
 			float t1 = (e+aabb_min.z)/f;
 			float t2 = (e+aabb_max.z)/f;
@@ -374,8 +371,6 @@ int main( void )
 			// like Binary Space Partitionning Tree (BSP-Tree),
 			// Bounding Volume Hierarchy (BVH) or other.
 			for(int i=0; i<100; i++){
-
-				float intersection_distance; // Output of TestRayOBBIntersection()
 				glm::vec3 aabb_min(-1.0f, -1.0f, -1.0f);
 				glm::vec3 aabb_max( 1.0f,  1.0f,  1.0f);
 
@@ -387,7 +382,7 @@ int main( void )
 				glm::mat4 ModelMatrix = TranslationMatrix * RotationMatrix;
 
 
-				if ( TestRayOBBIntersection(
+				if (float intersection_distance; TestRayOBBIntersection(
 					ray_origin, 
 					ray_direction, 
 					aabb_min, 

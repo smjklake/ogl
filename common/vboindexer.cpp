@@ -104,8 +104,7 @@ bool getSimilarVertexIndex_fast(
     unsigned short& result
 )
 {
-    const auto it = VertexToOutIndex.find(packed);
-    if (it == VertexToOutIndex.end())
+    if (const auto it = VertexToOutIndex.find(packed); it == VertexToOutIndex.end())
     {
         return false;
     }
@@ -136,9 +135,8 @@ void indexVBO(
 
 
         // Try to find a similar vertex in out_XXXX
-        unsigned short index;
 
-        if (getSimilarVertexIndex_fast(packed, VertexToOutIndex, index))
+        if (unsigned short index; getSimilarVertexIndex_fast(packed, VertexToOutIndex, index))
         {
             // A similar vertex is already in the VBO, use it instead!
             out_indices.push_back(index);

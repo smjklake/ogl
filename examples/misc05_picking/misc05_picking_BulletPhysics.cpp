@@ -36,8 +36,8 @@ void ScreenPosToWorldRay(
 	int screenWidth, int screenHeight,  // Window size, in pixels
 	glm::mat4 ViewMatrix,               // Camera position and orientation
 	glm::mat4 ProjectionMatrix,         // Camera parameters (ratio, field of view, near and far planes)
-	glm::vec3& out_origin,              // Ouput : Origin of the ray. /!\ Starts at the near plane, so if you want the ray to start at the camera's position instead, ignore this.
-	glm::vec3& out_direction            // Ouput : Direction, in world space, of the ray that goes "through" the mouse.
+	glm::vec3& out_origin,              // Output : Origin of the ray. /!\ Starts at the near plane, so if you want the ray to start at the camera's position instead, ignore this.
+	glm::vec3& out_direction            // Output : Direction, in world space, of the ray that goes "through" the mouse.
 ){
 
 	// The ray Start and End positions, in Normalized Device Coordinates (Have you read Tutorial 4 ?)
@@ -197,7 +197,7 @@ int main( void )
 
 
 
-	// Generate positions & rotations for 100 monkeys
+	// Generate positions and rotations for 100 monkeys
 	std::vector<glm::vec3> positions(100);
 	std::vector<glm::quat> orientations(100);
 	for(int i=0; i<100; i++){
@@ -261,7 +261,7 @@ int main( void )
 		// Small hack : store the mesh's index "i" in Bullet's User Pointer.
 		// Will be used to know which object is picked. 
 		// A real program would probably pass a "MyGameObjectPointer" instead.
-		rigidBody->setUserPointer((void*)i);
+		rigidBody->setUserPointer(reinterpret_cast<void*>(i));
 
 	}
 
@@ -324,7 +324,7 @@ int main( void )
 			dynamicsWorld->rayTest(btVector3(out_origin.x, out_origin.y, out_origin.z), btVector3(out_end.x, out_end.y, out_end.z), RayCallback);
 			if(RayCallback.hasHit()) {
 				std::ostringstream oss;
-				oss << "mesh " << (size_t)RayCallback.m_collisionObject->getUserPointer();
+				oss << "mesh " << reinterpret_cast<size_t>(RayCallback.m_collisionObject->getUserPointer());
 				message = oss.str();
 			}else{
 				message = "background";
@@ -471,7 +471,7 @@ int main( void )
 //// Helper class; draws the world as seen by Bullet.
 //// This is very handy to see it Bullet's world matches yours.
 //// This example uses the old OpenGL API for simplicity, 
-//// so you'll have to remplace GLFW_OPENGL_CORE_PROFILE by
+//// so you'll have to replace GLFW_OPENGL_CORE_PROFILE by
 //// GLFW_OPENGL_COMPAT_PROFILE in glfwWindowHint()
 //// How to use this class :
 //// Declare an instance of the class :

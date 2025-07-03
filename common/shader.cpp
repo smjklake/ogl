@@ -20,8 +20,7 @@ GLuint LoadShaders(const char* vertex_file_path, const char* fragment_file_path)
 
     // Read the Vertex Shader code from the file
     std::string VertexShaderCode;
-    std::ifstream VertexShaderStream(vertex_file_path, std::ios::in);
-    if (VertexShaderStream.is_open())
+    if (std::ifstream VertexShaderStream(vertex_file_path, std::ios::in); VertexShaderStream.is_open())
     {
         std::stringstream sstr;
         sstr << VertexShaderStream.rdbuf();
@@ -38,8 +37,7 @@ GLuint LoadShaders(const char* vertex_file_path, const char* fragment_file_path)
 
     // Read the Fragment Shader code from the file
     std::string FragmentShaderCode;
-    std::ifstream FragmentShaderStream(fragment_file_path, std::ios::in);
-    if (FragmentShaderStream.is_open())
+    if (std::ifstream FragmentShaderStream(fragment_file_path, std::ios::in); FragmentShaderStream.is_open())
     {
         std::stringstream sstr;
         sstr << FragmentShaderStream.rdbuf();

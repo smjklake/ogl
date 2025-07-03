@@ -315,10 +315,10 @@ int main( void )
 
 
 		glMatrixMode(GL_PROJECTION);
-		glLoadMatrixf((const GLfloat*)&ProjectionMatrix[0]);
+		glLoadMatrixf(reinterpret_cast<const GLfloat*>(&ProjectionMatrix[0]));
 		glMatrixMode(GL_MODELVIEW);
 		glm::mat4 MV = ViewMatrix * ModelMatrix;
-		glLoadMatrixf((const GLfloat*)&MV[0]);
+		glLoadMatrixf(reinterpret_cast<const GLfloat*>(&MV[0]));
 
 
 		glUseProgram(0);

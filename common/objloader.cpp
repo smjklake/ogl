@@ -44,8 +44,7 @@ bool loadOBJ(
     {
         char lineHeader[128];
         // read the first word of the line
-        int res = fscanf(file, "%s", lineHeader);
-        if (res == EOF)
+        if (int res = fscanf(file, "%s", lineHeader); res == EOF)
             break; // EOF = End Of File. Quit the loop.
 
         // else : parse lineHeader
