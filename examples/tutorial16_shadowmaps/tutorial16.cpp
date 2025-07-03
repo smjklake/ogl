@@ -100,7 +100,7 @@ int main( void )
 	std::vector<glm::vec3> vertices;
 	std::vector<glm::vec2> uvs;
 	std::vector<glm::vec3> normals;
-	bool res = loadOBJ("room_thickwalls.obj", vertices, uvs, normals);
+	// bool res = loadOBJ("room_thickwalls.obj", vertices, uvs, normals);
 
 	std::vector<unsigned short> indices;
 	std::vector<glm::vec3> indexed_vertices;
@@ -219,7 +219,7 @@ int main( void )
 		// Use our shader
 		glUseProgram(depthProgramID);
 
-		glm::vec3 lightInvDir = glm::vec3(0.5f,2,2);
+		auto lightInvDir = glm::vec3(0.5f,2,2);
 
 		// Compute the MVP matrix from the light's point of view
 		glm::mat4 depthProjectionMatrix = glm::ortho<float>(-10,10,-10,10,-10,20);
@@ -229,7 +229,7 @@ int main( void )
 		//glm::mat4 depthProjectionMatrix = glm::perspective<float>(45.0f, 1.0f, 2.0f, 50.0f);
 		//glm::mat4 depthViewMatrix = glm::lookAt(lightPos, lightPos-lightInvDir, glm::vec3(0,1,0));
 
-		glm::mat4 depthModelMatrix = glm::mat4(1.0);
+		auto depthModelMatrix = glm::mat4(1.0);
 		glm::mat4 depthMVP = depthProjectionMatrix * depthViewMatrix * depthModelMatrix;
 
 		// Send our transformation to the currently bound shader, 
@@ -257,7 +257,7 @@ int main( void )
 			GL_TRIANGLES,      // mode
 			indices.size(),    // count
 			GL_UNSIGNED_SHORT, // type
-			(void*)nullptr           // element array buffer offset
+			nullptr           // element array buffer offset
 		);
 
 		glDisableVertexAttribArray(0);
@@ -282,7 +282,7 @@ int main( void )
 		glm::mat4 ProjectionMatrix = getProjectionMatrix();
 		glm::mat4 ViewMatrix = getViewMatrix();
 		//ViewMatrix = glm::lookAt(glm::vec3(14,6,4), glm::vec3(0,1,0), glm::vec3(0,1,0));
-		glm::mat4 ModelMatrix = glm::mat4(1.0);
+		auto ModelMatrix = glm::mat4(1.0);
 		glm::mat4 MVP = ProjectionMatrix * ViewMatrix * ModelMatrix;
 		
 		glm::mat4 biasMatrix(
@@ -360,7 +360,7 @@ int main( void )
 			GL_TRIANGLES,      // mode
 			indices.size(),    // count
 			GL_UNSIGNED_SHORT, // type
-			(void*)nullptr           // element array buffer offset
+			nullptr           // element array buffer offset
 		);
 
 		glDisableVertexAttribArray(0);

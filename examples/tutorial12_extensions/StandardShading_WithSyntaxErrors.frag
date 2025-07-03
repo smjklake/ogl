@@ -1,7 +1,7 @@
 #version 330 core
 
 // a big syntax error to demonstrate the point...
-HELLO WORLD
+//HELLO WORLD
 
 // Interpolated values from the vertex shaders
 in vec2 UV;

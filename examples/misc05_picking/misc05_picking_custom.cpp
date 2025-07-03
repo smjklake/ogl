@@ -274,7 +274,7 @@ int main( void )
 	std::vector<glm::vec3> vertices;
 	std::vector<glm::vec2> uvs;
 	std::vector<glm::vec3> normals;
-	bool res = loadOBJ("suzanne.obj", vertices, uvs, normals);
+	// bool res = loadOBJ("suzanne.obj", vertices, uvs, normals);
 
 	std::vector<unsigned short> indices;
 	std::vector<glm::vec3> indexed_vertices;
@@ -429,7 +429,7 @@ int main( void )
 			glUniformMatrix4fv(ModelMatrixID, 1, GL_FALSE, &ModelMatrix[0][0]);
 			glUniformMatrix4fv(ViewMatrixID, 1, GL_FALSE, &ViewMatrix[0][0]);
 
-			glm::vec3 lightPos = glm::vec3(4,4,4);
+			auto lightPos = glm::vec3(4,4,4);
 			glUniform3f(LightID, lightPos.x, lightPos.y, lightPos.z);
 
 			// Bind our texture in Texture Unit 0
@@ -482,7 +482,7 @@ int main( void )
 				GL_TRIANGLES,      // mode
 				indices.size(),    // count
 				GL_UNSIGNED_SHORT,   // type
-				(void*)nullptr           // element array buffer offset
+				nullptr           // element array buffer offset
 			);
 
 

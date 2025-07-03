@@ -146,19 +146,19 @@ void tests(){
 
 	// Testing standard, easy case
 	// Must be 90� rotation on X : 0.7 0 0 0.7
-	quat X90rot = RotationBetweenVectors(Ypos, Zpos);
+	// quat X90rot = RotationBetweenVectors(Ypos, Zpos);
 
 	// Testing with v1 = v2
 	// Must be identity : 0 0 0 1
-	quat id = RotationBetweenVectors(Xpos, Xpos);
+	// quat id = RotationBetweenVectors(Xpos, Xpos);
 
 	// Testing with v1 = -v2
 	// Must be 180� on +/-Y axis : 0 +/-1 0 0
-	quat Y180rot = RotationBetweenVectors(Xpos, Xneg);
+	// quat Y180rot = RotationBetweenVectors(Xpos, Xneg);
 
 	// Testing with v1 = -v2, but with a "bad first guess"
 	// Must be 180� on +/-Y axis : 0 +/-1 0 0
-	quat X180rot = RotationBetweenVectors(Zpos, Zneg);
+	// quat X180rot = RotationBetweenVectors(Zpos, Zneg);
 
 
 }

@@ -94,7 +94,7 @@ struct PackedVertex
 
     bool operator<(const PackedVertex that) const
     {
-        return memcmp((void*)this, (void*)&that, sizeof(PackedVertex)) > 0;
+        return memcmp(this, &that, sizeof(PackedVertex)) > 0;
     };
 };
 

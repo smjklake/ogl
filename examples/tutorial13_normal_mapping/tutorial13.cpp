@@ -105,7 +105,7 @@ int main( void )
 	std::vector<glm::vec3> vertices;
 	std::vector<glm::vec2> uvs;
 	std::vector<glm::vec3> normals;
-	bool res = loadOBJ("cylinder.obj", vertices, uvs, normals);
+	// bool res = loadOBJ("cylinder.obj", vertices, uvs, normals);
 
 	std::vector<glm::vec3> tangents;
 	std::vector<glm::vec3> bitangents;
@@ -188,9 +188,9 @@ int main( void )
 		computeMatricesFromInputs();
 		glm::mat4 ProjectionMatrix = getProjectionMatrix();
 		glm::mat4 ViewMatrix = getViewMatrix();
-		glm::mat4 ModelMatrix = glm::mat4(1.0);
+		auto ModelMatrix = glm::mat4(1.0);
 		glm::mat4 ModelViewMatrix = ViewMatrix * ModelMatrix;
-		glm::mat3 ModelView3x3Matrix = glm::mat3(ModelViewMatrix);
+		auto ModelView3x3Matrix = glm::mat3(ModelViewMatrix);
 		glm::mat4 MVP = ProjectionMatrix * ViewMatrix * ModelMatrix;
 
 		// Send our transformation to the currently bound shader, 
@@ -200,9 +200,9 @@ int main( void )
 		glUniformMatrix4fv(ViewMatrixID, 1, GL_FALSE, &ViewMatrix[0][0]);
 		glUniformMatrix4fv(ViewMatrixID, 1, GL_FALSE, &ViewMatrix[0][0]);
 		glUniformMatrix3fv(ModelView3x3MatrixID, 1, GL_FALSE, &ModelView3x3Matrix[0][0]);
-		
 
-		glm::vec3 lightPos = glm::vec3(0,0,4);
+
+		auto lightPos = glm::vec3(0,0,4);
 		glUniform3f(LightID, lightPos.x, lightPos.y, lightPos.z);
 
 		// Bind our diffuse texture in Texture Unit 0
@@ -297,7 +297,7 @@ int main( void )
 			GL_TRIANGLES,      // mode
 			indices.size(),    // count
 			GL_UNSIGNED_SHORT, // type
-			(void*)nullptr           // element array buffer offset
+			nullptr           // element array buffer offset
 		);
 
 		glDisableVertexAttribArray(0);

@@ -25,7 +25,7 @@ glm::mat4 getProjectionMatrix()
 
 
 // Initial position: on +Z
-glm::vec3 position = glm::vec3(0, 0, 5);
+auto position = glm::vec3(0, 0, 5);
 // Initial horizontal angle: toward -Z
 float horizontalAngle = 3.14f;
 // Initial vertical angle : none
@@ -65,7 +65,7 @@ void computeMatricesFromInputs()
     );
 
     // Right vector
-    const glm::vec3 right = glm::vec3(
+    const auto right = glm::vec3(
         sin(horizontalAngle - 3.14f / 2.0f),
         0,
         cos(horizontalAngle - 3.14f / 2.0f)

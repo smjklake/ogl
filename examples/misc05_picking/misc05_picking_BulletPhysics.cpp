@@ -164,7 +164,7 @@ int main( void )
 	std::vector<glm::vec3> vertices;
 	std::vector<glm::vec2> uvs;
 	std::vector<glm::vec3> normals;
-	bool res = loadOBJ("suzanne.obj", vertices, uvs, normals);
+	// bool res = loadOBJ("suzanne.obj", vertices, uvs, normals);
 
 	std::vector<unsigned short> indices;
 	std::vector<glm::vec3> indexed_vertices;
@@ -220,14 +220,14 @@ int main( void )
 	btBroadphaseInterface* broadphase = new btDbvtBroadphase();
  
 	// Set up the collision configuration and dispatcher
-	btDefaultCollisionConfiguration* collisionConfiguration = new btDefaultCollisionConfiguration();
-	btCollisionDispatcher* dispatcher = new btCollisionDispatcher(collisionConfiguration);
+	auto collisionConfiguration = new btDefaultCollisionConfiguration();
+	auto dispatcher = new btCollisionDispatcher(collisionConfiguration);
  
 	// The actual physics solver
-	btSequentialImpulseConstraintSolver* solver = new btSequentialImpulseConstraintSolver;
+	auto solver = new btSequentialImpulseConstraintSolver;
  
 	// The world.
-	btDiscreteDynamicsWorld* dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher,broadphase,solver,collisionConfiguration);
+	auto dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher,broadphase,solver,collisionConfiguration);
 	dynamicsWorld->setGravity(btVector3(0,-9.81f,0));
 
 
@@ -242,7 +242,7 @@ int main( void )
 
 	for(int i=0; i<100; i++){
 
-		btDefaultMotionState* motionstate = new btDefaultMotionState(btTransform(
+		auto motionstate = new btDefaultMotionState(btTransform(
 			btQuaternion(orientations[i].x, orientations[i].y, orientations[i].z, orientations[i].w), 
 			btVector3(positions[i].x, positions[i].y, positions[i].z)
 		));
@@ -253,7 +253,7 @@ int main( void )
 			boxCollisionShape,  // collision shape of body
 			btVector3(0,0,0)    // local inertia
 		);
-		btRigidBody *rigidBody = new btRigidBody(rigidBodyCI);
+		auto rigidBody = new btRigidBody(rigidBodyCI);
 
 		rigidbodies.push_back(rigidBody);
 		dynamicsWorld->addRigidBody(rigidBody);
@@ -272,8 +272,8 @@ int main( void )
 
 	do{
 
-		btVector3 p0 = rigidbodies[0]->getCenterOfMassPosition();
-		glm::vec3 v0 = positions[0];
+		// btVector3 p0 = rigidbodies[0]->getCenterOfMassPosition();
+		// glm::vec3 v0 = positions[0];
 		//printf("p0 : %f %f %f, v0 : %f %f %f\n", p0.x(), p0.y(), p0.z(), v0.x, v0.y, v0.z);
 
 
@@ -362,7 +362,7 @@ int main( void )
 			glUniformMatrix4fv(ModelMatrixID, 1, GL_FALSE, &ModelMatrix[0][0]);
 			glUniformMatrix4fv(ViewMatrixID, 1, GL_FALSE, &ViewMatrix[0][0]);
 
-			glm::vec3 lightPos = glm::vec3(4,4,4);
+			auto lightPos = glm::vec3(4,4,4);
 			glUniform3f(LightID, lightPos.x, lightPos.y, lightPos.z);
 
 			// Bind our texture in Texture Unit 0
@@ -415,7 +415,7 @@ int main( void )
 				GL_TRIANGLES,      // mode
 				indices.size(),    // count
 				GL_UNSIGNED_SHORT,   // type
-				(void*)nullptr           // element array buffer offset
+				nullptr           // element array buffer offset
 			);
 
 

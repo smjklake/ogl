@@ -163,7 +163,7 @@ int main()
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         const double currentTime = glfwGetTime();
-        double delta = currentTime - lastTime;
+        // double delta = currentTime - lastTime;
         lastTime = currentTime;
 
 
@@ -196,7 +196,7 @@ int main()
         // w.r.t the camera's distance.
         // There should be a getCameraPosition() function in common/controls.cpp,
         // but this works too.
-        glm::vec3 CameraPosition(glm::inverse(ViewMatrix)[3]);
+        // glm::vec3 CameraPosition(glm::inverse(ViewMatrix)[3]);
 
         glm::mat4 ViewProjectionMatrix = ProjectionMatrix * ViewMatrix;
 

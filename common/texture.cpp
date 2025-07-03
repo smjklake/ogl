@@ -55,14 +55,14 @@ GLuint loadBMP_custom(const char* imagepath)
     }
 
     // Read the information about the image
-    unsigned int dataPos = *reinterpret_cast<int*>(&(header[0x0A]));
+    // unsigned int dataPos = *reinterpret_cast<int*>(&(header[0x0A]));
     unsigned int imageSize = *reinterpret_cast<int*>(&(header[0x22]));
     const unsigned int width = *reinterpret_cast<int*>(&(header[0x12]));
     const unsigned int height = *reinterpret_cast<int*>(&(header[0x16]));
 
     // Some BMP files are misformatted, guess missing information
     if (imageSize == 0) imageSize = width * height * 3; // 3: one byte for each Red, Green and Blue component
-    if (dataPos == 0) dataPos = 54; // The BMP header is done that way
+    // if (dataPos == 0) dataPos = 54; // The BMP header is done that way
 
     // Create a buffer
     auto* data = new unsigned char [imageSize];

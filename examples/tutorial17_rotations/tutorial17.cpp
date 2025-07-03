@@ -144,7 +144,7 @@ int main( void )
 	std::vector<glm::vec3> vertices;
 	std::vector<glm::vec2> uvs;
 	std::vector<glm::vec3> normals;
-	bool res = loadOBJ("suzanne.obj", vertices, uvs, normals);
+	// bool res = loadOBJ("suzanne.obj", vertices, uvs, normals);
  
 	std::vector<unsigned short> indices;
 	std::vector<glm::vec3> indexed_vertices;
@@ -258,8 +258,8 @@ int main( void )
  
 		// Index buffer
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, elementbuffer);
- 
-		glm::vec3 lightPos = glm::vec3(4,4,4);
+
+		auto lightPos = glm::vec3(4,4,4);
 		glUniform3f(LightID, lightPos.x, lightPos.y, lightPos.z);
  
 		{ // Euler
@@ -288,7 +288,7 @@ int main( void )
 				GL_TRIANGLES,      // mode
 				indices.size(),    // count
 				GL_UNSIGNED_SHORT,   // type
-				(void*)nullptr           // element array buffer offset
+				nullptr           // element array buffer offset
 			);
  
 		}
@@ -297,7 +297,7 @@ int main( void )
 			// It the box is checked...
 			if (gLookAtOther){
 				vec3 desiredDir = gPosition1-gPosition2;
-				vec3 desiredUp = vec3(0.0f, 1.0f, 0.0f); // +Y
+				auto desiredUp = vec3(0.0f, 1.0f, 0.0f); // +Y
  
 				// Compute the desired orientation
 				quat targetOrientation = normalize(LookAt(desiredDir, desiredUp));
@@ -325,7 +325,7 @@ int main( void )
 				GL_TRIANGLES,      // mode
 				indices.size(),    // count
 				GL_UNSIGNED_SHORT,   // type
-				(void*)nullptr           // element array buffer offset
+				nullptr           // element array buffer offset
 			);
 		}
  
