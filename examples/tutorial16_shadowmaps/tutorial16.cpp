@@ -88,7 +88,7 @@ int main( void )
 	glBindVertexArray(VertexArrayID);
 
 	// Create and compile our GLSL program from the shaders
-	const GLuint depthProgramID = LoadShaders( "DepthRTT.vertexshader", "DepthRTT.fragmentshader" );
+	const GLuint depthProgramID = LoadShaders( "DepthRTT.vert", "DepthRTT.frag" );
 
 	// Get a handle for our "MVP" uniform
 	const GLuint depthMatrixID = glGetUniformLocation(depthProgramID, "depthMVP");
@@ -179,12 +179,12 @@ int main( void )
 	glBufferData(GL_ARRAY_BUFFER, sizeof(g_quad_vertex_buffer_data), g_quad_vertex_buffer_data, GL_STATIC_DRAW);
 
 	// Create and compile our GLSL program from the shaders
-	const GLuint quad_programID = LoadShaders( "Passthrough.vertexshader", "SimpleTexture.fragmentshader" );
+	const GLuint quad_programID = LoadShaders( "Passthrough.vert", "SimpleTexture.frag" );
 	const GLuint texID = glGetUniformLocation(quad_programID, "texture");
 
 
 	// Create and compile our GLSL program from the shaders
-	const GLuint programID = LoadShaders( "ShadowMapping.vertexshader", "ShadowMapping.fragmentshader" );
+	const GLuint programID = LoadShaders( "ShadowMapping.vert", "ShadowMapping.frag" );
 
 	// Get a handle for our "myTextureSampler" uniform
 	const GLuint TextureID  = glGetUniformLocation(programID, "myTextureSampler");

@@ -90,8 +90,8 @@ int main( void )
 	glBindVertexArray(VertexArrayID);
 
 	// Create and compile our GLSL program from the shaders
-	GLuint programID = LoadShaders( "StandardShading.vertexshader", "StandardShading.fragmentshader" );
-	GLuint pickingProgramID = LoadShaders( "Picking.vertexshader", "Picking.fragmentshader" );
+	GLuint programID = LoadShaders( "StandardShading.vert", "StandardShading.frag" );
+	GLuint pickingProgramID = LoadShaders( "Picking.vert", "Picking.frag" );
 
 
 

@@ -135,8 +135,8 @@ int main(void)
     char vertexShaderPath[256];
     char fragmentShaderPath[256];
 
-    sprintf(vertexShaderPath, "%s%s", TutorialSourcePath, "Billboard.vertexshader");
-    sprintf(fragmentShaderPath, "%s%s", TutorialSourcePath, "Billboard.fragmentshader");
+    sprintf(vertexShaderPath, "%s%s", TutorialSourcePath, "Billboard.vert");
+    sprintf(fragmentShaderPath, "%s%s", TutorialSourcePath, "Billboard.frag");
 
     const GLuint programID = LoadShaders(vertexShaderPath, fragmentShaderPath);
 

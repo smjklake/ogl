@@ -88,8 +88,8 @@ int main()
     char vertexShaderPath[256];
     char fragmentShaderPath[256];
 
-    sprintf(vertexShaderPath, "%s%s", TutorialSourcePath, "Billboard.vertexshader");
-    sprintf(fragmentShaderPath, "%s%s", TutorialSourcePath, "Billboard.fragmentshader");
+    sprintf(vertexShaderPath, "%s%s", TutorialSourcePath, "Billboard.vert");
+    sprintf(fragmentShaderPath, "%s%s", TutorialSourcePath, "Billboard.frag");
 
     const GLuint programID = LoadShaders(vertexShaderPath, fragmentShaderPath);
 
@@ -124,8 +124,8 @@ int main()
 
 #ifdef DRAW_CUBE
     // Everything here comes from Tutorial 4
-    const GLuint cubeProgramID = LoadShaders("../tutorial04_colored_cube/TransformVertexShader.vertexshader",
-                                       "../tutorial04_colored_cube/ColorFragmentShader.fragmentshader");
+    const GLuint cubeProgramID = LoadShaders("../tutorial04_colored_cube/TransformVertexShader.vert",
+                                       "../tutorial04_colored_cube/ColorFragmentShader.frag");
     const GLuint cubeMatrixID = glGetUniformLocation(cubeProgramID, "MVP");
     static constexpr GLfloat g_cube_vertex_buffer_data[] = {
         -1.0f, -1.0f, -1.0f, -1.0f, -1.0f, 1.0f, -1.0f, 1.0f, 1.0f, 1.0f, 1.0f, -1.0f, -1.0f, -1.0f, -1.0f, -1.0f, 1.0f,

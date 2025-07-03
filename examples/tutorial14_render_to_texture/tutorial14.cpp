@@ -87,7 +87,7 @@ int main( void )
 	glBindVertexArray(VertexArrayID);
 
 	// Create and compile our GLSL program from the shaders
-	const GLuint programID = LoadShaders( "StandardShadingRTT.vertexshader", "StandardShadingRTT.fragmentshader" );
+	const GLuint programID = LoadShaders( "StandardShadingRTT.vert", "StandardShadingRTT.frag" );
 
 	// Get a handle for our "MVP" uniform
 	const GLuint MatrixID = glGetUniformLocation(programID, "MVP");
@@ -214,7 +214,7 @@ int main( void )
 	glBufferData(GL_ARRAY_BUFFER, sizeof(g_quad_vertex_buffer_data), g_quad_vertex_buffer_data, GL_STATIC_DRAW);
 
 	// Create and compile our GLSL program from the shaders
-	const GLuint quad_programID = LoadShaders( "Passthrough.vertexshader", "WobblyTexture.fragmentshader" );
+	const GLuint quad_programID = LoadShaders( "Passthrough.vert", "WobblyTexture.frag" );
 	const GLuint texID = glGetUniformLocation(quad_programID, "renderedTexture");
 	const GLuint timeID = glGetUniformLocation(quad_programID, "time");
     

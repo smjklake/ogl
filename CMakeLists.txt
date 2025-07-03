@@ -74,8 +74,8 @@ add_executable(tutorial02_red_triangle
         common/shader.cpp
         common/shader.hpp
 
-        examples/tutorial02_red_triangle/SimpleFragmentShader.fragmentshader
-        examples/tutorial02_red_triangle/SimpleVertexShader.vertexshader
+        examples/tutorial02_red_triangle/SimpleFragmentShader.frag
+        examples/tutorial02_red_triangle/SimpleVertexShader.vert
 )
 target_link_libraries(tutorial02_red_triangle
         ${ALL_LIBS}
@@ -91,8 +91,8 @@ add_executable(tutorial03_matrices
         common/shader.cpp
         common/shader.hpp
 
-        examples/tutorial03_matrices/SimpleTransform.vertexshader
-        examples/tutorial03_matrices/SingleColor.fragmentshader
+        examples/tutorial03_matrices/SimpleTransform.vert
+        examples/tutorial03_matrices/SingleColor.frag
 )
 #set_target_properties(tutorial03_matrices PROPERTIES RUNTIME_OUTPUT_DIRECTORY /test1)
 target_link_libraries(tutorial03_matrices
@@ -108,8 +108,8 @@ add_executable(tutorial04_colored_cube
         common/shader.cpp
         common/shader.hpp
 
-        examples/tutorial04_colored_cube/TransformVertexShader.vertexshader
-        examples/tutorial04_colored_cube/ColorFragmentShader.fragmentshader
+        examples/tutorial04_colored_cube/TransformVertexShader.vert
+        examples/tutorial04_colored_cube/ColorFragmentShader.frag
 )
 target_link_libraries(tutorial04_colored_cube
         ${ALL_LIBS}
@@ -126,8 +126,8 @@ add_executable(tutorial05_textured_cube
         common/texture.cpp
         common/texture.hpp
 
-        examples/tutorial05_textured_cube/TransformVertexShader.vertexshader
-        examples/tutorial05_textured_cube/TextureFragmentShader.fragmentshader
+        examples/tutorial05_textured_cube/TransformVertexShader.vert
+        examples/tutorial05_textured_cube/TextureFragmentShader.frag
 )
 target_link_libraries(tutorial05_textured_cube
         ${ALL_LIBS}
@@ -146,8 +146,8 @@ add_executable(tutorial06_keyboard_and_mouse
         common/texture.cpp
         common/texture.hpp
 
-        examples/tutorial06_keyboard_and_mouse/TransformVertexShader.vertexshader
-        examples/tutorial06_keyboard_and_mouse/TextureFragmentShader.fragmentshader
+        examples/tutorial06_keyboard_and_mouse/TransformVertexShader.vert
+        examples/tutorial06_keyboard_and_mouse/TextureFragmentShader.frag
 )
 target_link_libraries(tutorial06_keyboard_and_mouse
         ${ALL_LIBS}
@@ -168,8 +168,8 @@ add_executable(tutorial07_model_loading
         common/objloader.cpp
         common/objloader.hpp
 
-        examples/tutorial07_model_loading/TransformVertexShader.vertexshader
-        examples/tutorial07_model_loading/TextureFragmentShader.fragmentshader
+        examples/tutorial07_model_loading/TransformVertexShader.vert
+        examples/tutorial07_model_loading/TextureFragmentShader.frag
 )
 target_link_libraries(tutorial07_model_loading
         ${ALL_LIBS}
@@ -190,8 +190,8 @@ add_executable(tutorial08_basic_shading
         common/objloader.cpp
         common/objloader.hpp
 
-        examples/tutorial08_basic_shading/StandardShading.vertexshader
-        examples/tutorial08_basic_shading/StandardShading.fragmentshader
+        examples/tutorial08_basic_shading/StandardShading.vert
+        examples/tutorial08_basic_shading/StandardShading.frag
 )
 target_link_libraries(tutorial08_basic_shading
         ${ALL_LIBS}
@@ -214,8 +214,8 @@ add_executable(tutorial09_vbo_indexing
         common/vboindexer.cpp
         common/vboindexer.hpp
 
-        examples/tutorial09_vbo_indexing/StandardShading.vertexshader
-        examples/tutorial09_vbo_indexing/StandardShading.fragmentshader
+        examples/tutorial09_vbo_indexing/StandardShading.vert
+        examples/tutorial09_vbo_indexing/StandardShading.frag
 )
 target_link_libraries(tutorial09_vbo_indexing
         ${ALL_LIBS}
@@ -236,8 +236,8 @@ add_executable(tutorial09_AssImp
         common/objloader.cpp
         common/objloader.hpp
 
-        examples/tutorial09_vbo_indexing/StandardShading.vertexshader
-        examples/tutorial09_vbo_indexing/StandardShading.fragmentshader
+        examples/tutorial09_vbo_indexing/StandardShading.vert
+        examples/tutorial09_vbo_indexing/StandardShading.frag
 )
 target_link_libraries(tutorial09_AssImp
         ${ALL_LIBS}
@@ -262,8 +262,8 @@ add_executable(tutorial09_several_objects
         common/vboindexer.cpp
         common/vboindexer.hpp
 
-        examples/tutorial09_vbo_indexing/StandardShading.vertexshader
-        examples/tutorial09_vbo_indexing/StandardShading.fragmentshader
+        examples/tutorial09_vbo_indexing/StandardShading.vert
+        examples/tutorial09_vbo_indexing/StandardShading.frag
 )
 target_link_libraries(tutorial09_several_objects
         ${ALL_LIBS}
@@ -286,8 +286,8 @@ add_executable(tutorial10_transparency
         common/vboindexer.cpp
         common/vboindexer.hpp
 
-        examples/tutorial10_transparency/StandardShading.vertexshader
-        examples/tutorial10_transparency/StandardTransparentShading.fragmentshader
+        examples/tutorial10_transparency/StandardShading.vert
+        examples/tutorial10_transparency/StandardTransparentShading.frag
 )
 target_link_libraries(tutorial10_transparency
         ${ALL_LIBS}
@@ -312,10 +312,10 @@ add_executable(tutorial11_2d_fonts
         common/text2D.hpp
         common/text2D.cpp
 
-        examples/tutorial11_2d_fonts/StandardShading.vertexshader
-        examples/tutorial11_2d_fonts/StandardShading.fragmentshader
-        examples/tutorial11_2d_fonts/TextVertexShader.vertexshader
-        examples/tutorial11_2d_fonts/TextVertexShader.fragmentshader
+        examples/tutorial11_2d_fonts/StandardShading.vert
+        examples/tutorial11_2d_fonts/StandardShading.frag
+        examples/tutorial11_2d_fonts/TextVertexShader.vert
+        examples/tutorial11_2d_fonts/TextVertexShader.frag
 
 )
 target_link_libraries(tutorial11_2d_fonts
@@ -339,8 +339,8 @@ add_executable(tutorial12_extensions
         common/vboindexer.cpp
         common/vboindexer.hpp
 
-        examples/tutorial12_extensions/StandardShading.vertexshader
-        examples/tutorial12_extensions/StandardShading_WithSyntaxErrors.fragmentshader
+        examples/tutorial12_extensions/StandardShading.vert
+        examples/tutorial12_extensions/StandardShading_WithSyntaxErrors.frag
 )
 target_link_libraries(tutorial12_extensions
         ${ALL_LIBS}
@@ -367,8 +367,8 @@ add_executable(tutorial13_normal_mapping
         common/tangentspace.hpp
         common/tangentspace.cpp
 
-        examples/tutorial13_normal_mapping/NormalMapping.vertexshader
-        examples/tutorial13_normal_mapping/NormalMapping.fragmentshader
+        examples/tutorial13_normal_mapping/NormalMapping.vert
+        examples/tutorial13_normal_mapping/NormalMapping.frag
 )
 target_link_libraries(tutorial13_normal_mapping
         ${ALL_LIBS}
@@ -394,10 +394,10 @@ add_executable(tutorial14_render_to_texture
         common/text2D.hpp
         common/text2D.cpp
 
-        examples/tutorial14_render_to_texture/StandardShadingRTT.vertexshader
-        examples/tutorial14_render_to_texture/StandardShadingRTT.fragmentshader
-        examples/tutorial14_render_to_texture/Passthrough.vertexshader
-        examples/tutorial14_render_to_texture/WobblyTexture.fragmentshader
+        examples/tutorial14_render_to_texture/StandardShadingRTT.vert
+        examples/tutorial14_render_to_texture/StandardShadingRTT.frag
+        examples/tutorial14_render_to_texture/Passthrough.vert
+        examples/tutorial14_render_to_texture/WobblyTexture.frag
 )
 target_link_libraries(tutorial14_render_to_texture
         ${ALL_LIBS}
@@ -421,8 +421,8 @@ add_executable(tutorial15_lightmaps
         common/vboindexer.cpp
         common/vboindexer.hpp
 
-        examples/tutorial15_lightmaps/TransformVertexShader.vertexshader
-        examples/tutorial15_lightmaps/TextureFragmentShaderLOD.fragmentshader
+        examples/tutorial15_lightmaps/TransformVertexShader.vert
+        examples/tutorial15_lightmaps/TextureFragmentShaderLOD.frag
 )
 target_link_libraries(tutorial15_lightmaps
         ${ALL_LIBS}
@@ -445,10 +445,10 @@ add_executable(tutorial16_shadowmaps_simple
         common/vboindexer.cpp
         common/vboindexer.hpp
 
-        examples/tutorial16_shadowmaps/ShadowMapping_SimpleVersion.vertexshader
-        examples/tutorial16_shadowmaps/ShadowMapping_SimpleVersion.fragmentshader
-        examples/tutorial16_shadowmaps/DepthRTT.vertexshader
-        examples/tutorial16_shadowmaps/DepthRTT.fragmentshader
+        examples/tutorial16_shadowmaps/ShadowMapping_SimpleVersion.vert
+        examples/tutorial16_shadowmaps/ShadowMapping_SimpleVersion.frag
+        examples/tutorial16_shadowmaps/DepthRTT.vert
+        examples/tutorial16_shadowmaps/DepthRTT.frag
 )
 target_link_libraries(tutorial16_shadowmaps_simple
         ${ALL_LIBS}
@@ -472,12 +472,12 @@ add_executable(tutorial16_shadowmaps
         common/vboindexer.cpp
         common/vboindexer.hpp
 
-        examples/tutorial16_shadowmaps/ShadowMapping.vertexshader
-        examples/tutorial16_shadowmaps/ShadowMapping.fragmentshader
-        examples/tutorial16_shadowmaps/DepthRTT.vertexshader
-        examples/tutorial16_shadowmaps/DepthRTT.fragmentshader
-        examples/tutorial16_shadowmaps/Passthrough.vertexshader
-        examples/tutorial16_shadowmaps/SimpleTexture.fragmentshader
+        examples/tutorial16_shadowmaps/ShadowMapping.vert
+        examples/tutorial16_shadowmaps/ShadowMapping.frag
+        examples/tutorial16_shadowmaps/DepthRTT.vert
+        examples/tutorial16_shadowmaps/DepthRTT.frag
+        examples/tutorial16_shadowmaps/Passthrough.vert
+        examples/tutorial16_shadowmaps/SimpleTexture.frag
 )
 target_link_libraries(tutorial16_shadowmaps
         ${ALL_LIBS}
@@ -502,8 +502,8 @@ add_executable(tutorial17_rotations
         common/quaternion_utils.cpp
         common/quaternion_utils.hpp
 
-        examples/tutorial17_rotations/StandardShading.vertexshader
-        examples/tutorial17_rotations/StandardShading.fragmentshader
+        examples/tutorial17_rotations/StandardShading.vert
+        examples/tutorial17_rotations/StandardShading.frag
 )
 target_link_libraries(tutorial17_rotations
         ${ALL_LIBS}
@@ -541,10 +541,10 @@ add_executable(misc05_picking_slow_easy
         common/vboindexer.cpp
         common/vboindexer.hpp
 
-        examples/misc05_picking/StandardShading.vertexshader
-        examples/misc05_picking/StandardShading.fragmentshader
-        examples/misc05_picking/Picking.vertexshader
-        examples/misc05_picking/Picking.fragmentshader
+        examples/misc05_picking/StandardShading.vert
+        examples/misc05_picking/StandardShading.frag
+        examples/misc05_picking/Picking.vert
+        examples/misc05_picking/Picking.frag
 )
 target_link_libraries(misc05_picking_slow_easy
         ${ALL_LIBS}
@@ -568,8 +568,8 @@ add_executable(misc05_picking_custom
         common/vboindexer.cpp
         common/vboindexer.hpp
 
-        examples/misc05_picking/StandardShading.vertexshader
-        examples/misc05_picking/StandardShading.fragmentshader
+        examples/misc05_picking/StandardShading.vert
+        examples/misc05_picking/StandardShading.frag
 )
 target_link_libraries(misc05_picking_custom
         ${ALL_LIBS}
@@ -593,8 +593,8 @@ add_executable(misc05_picking_BulletPhysics
         common/vboindexer.cpp
         common/vboindexer.hpp
 
-        examples/misc05_picking/StandardShading.vertexshader
-        examples/misc05_picking/StandardShading.fragmentshader
+        examples/misc05_picking/StandardShading.vert
+        examples/misc05_picking/StandardShading.frag
 )
 target_link_libraries(misc05_picking_BulletPhysics
         ${ALL_LIBS}
@@ -616,8 +616,8 @@ add_executable(tutorial18_billboards
         common/texture.hpp
         common/controls.cpp
         common/controls.hpp
-        examples/tutorial18_billboards_and_particles/Billboard.fragmentshader
-        examples/tutorial18_billboards_and_particles/Billboard.vertexshader
+        examples/tutorial18_billboards_and_particles/Billboard.frag
+        examples/tutorial18_billboards_and_particles/Billboard.vert
 )
 
 target_link_libraries(tutorial18_billboards
@@ -636,8 +636,8 @@ add_executable(tutorial18_particles
         common/texture.hpp
         common/controls.cpp
         common/controls.hpp
-        examples/tutorial18_billboards_and_particles/Particle.fragmentshader
-        examples/tutorial18_billboards_and_particles/Particle.vertexshader
+        examples/tutorial18_billboards_and_particles/Particle.frag
+        examples/tutorial18_billboards_and_particles/Particle.vert
 )
 
 target_link_libraries(tutorial18_particles
