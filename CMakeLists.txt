@@ -1,6 +1,11 @@
 # CMake entry point
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.10)
 project(Tutorials)
+
+# Suppress CMake deprecation warnings from external dependencies
+set(CMAKE_WARN_DEPRECATED OFF CACHE BOOL "" FORCE)
+# Set OpenGL preference to avoid compatibility warnings
+set(OpenGL_GL_PREFERENCE GLVND)
 
 find_package(OpenGL REQUIRED)
 
