@@ -32,8 +32,8 @@ int main( void )
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 	// Open a window and create its OpenGL context
-	window = glfwCreateWindow( 1024, 768, "Tutorial 02 - Red triangle", NULL, NULL);
-	if( window == NULL ){
+	window = glfwCreateWindow( 1024, 768, "Tutorial 02 - Red triangle", nullptr, nullptr);
+	if( window == nullptr){
 		fprintf( stderr, "Failed to open GLFW window. If you have an Intel GPU, they are not 3.3 compatible. Try the 2.1 version of the tutorials.\n" );
 		getchar();
 		glfwTerminate();
@@ -61,10 +61,10 @@ int main( void )
 	glBindVertexArray(VertexArrayID);
 
 	// Create and compile our GLSL program from the shaders
-	GLuint programID = LoadShaders( "SimpleVertexShader.vertexshader", "SimpleFragmentShader.fragmentshader" );
+	const GLuint programID = LoadShaders( "SimpleVertexShader.vertexshader", "SimpleFragmentShader.fragmentshader" );
 
 
-	static const GLfloat g_vertex_buffer_data[] = { 
+	static constexpr GLfloat g_vertex_buffer_data[] = {
 		-1.0f, -1.0f, 0.0f,
 		 1.0f, -1.0f, 0.0f,
 		 0.0f,  1.0f, 0.0f,
@@ -92,7 +92,8 @@ int main( void )
 			GL_FLOAT,           // type
 			GL_FALSE,           // normalized?
 			0,                  // stride
-			(void*)0            // array buffer offset
+			static_cast<void*>(nullptr // array buffer offset
+			)            // array buffer offset
 		);
 
 		// Draw the triangle !

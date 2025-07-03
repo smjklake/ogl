@@ -10,7 +10,7 @@
 
 
 // Returns true iif v1 can be considered equal to v2
-bool is_near(float v1, float v2)
+bool is_near(const float v1, const float v2)
 {
     return std::fabs(v1 - v2) < 0.01f;
 }
@@ -67,7 +67,7 @@ void indexVBO_slow(
     {
         // Try to find a similar vertex in out_XXXX
         unsigned short index;
-        bool found = getSimilarVertexIndex(in_vertices[i], in_uvs[i], in_normals[i], out_vertices, out_uvs, out_normals,
+        const bool found = getSimilarVertexIndex(in_vertices[i], in_uvs[i], in_normals[i], out_vertices, out_uvs, out_normals,
                                            index);
 
         if (found)
@@ -104,7 +104,7 @@ bool getSimilarVertexIndex_fast(
     unsigned short& result
 )
 {
-    auto it = VertexToOutIndex.find(packed);
+    const auto it = VertexToOutIndex.find(packed);
     if (it == VertexToOutIndex.end())
     {
         return false;
@@ -177,7 +177,7 @@ void indexVBO_TBN(
     {
         // Try to find a similar vertex in out_XXXX
         unsigned short index;
-        bool found = getSimilarVertexIndex(in_vertices[i], in_uvs[i], in_normals[i], out_vertices, out_uvs, out_normals,
+        const bool found = getSimilarVertexIndex(in_vertices[i], in_uvs[i], in_normals[i], out_vertices, out_uvs, out_normals,
                                            index);
 
         if (found)

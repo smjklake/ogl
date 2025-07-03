@@ -34,9 +34,9 @@ void initText2D(const char* texturePath)
     Text2DUniformID = glGetUniformLocation(Text2DShaderID, "myTextureSampler");
 }
 
-void printText2D(const char* text, int x, int y, int size)
+void printText2D(const char* text, const int x, const int y, const int size)
 {
-    unsigned int length = strlen(text);
+    const unsigned int length = strlen(text);
 
     // Fill buffers
     std::vector<glm::vec2> vertices;
@@ -56,7 +56,7 @@ void printText2D(const char* text, int x, int y, int size)
         vertices.push_back(vertex_up_right);
         vertices.push_back(vertex_down_left);
 
-        char character = text[i];
+        const char character = text[i];
         float uv_x = (character % 16) / 16.0f;
         float uv_y = (character / 16) / 16.0f;
 

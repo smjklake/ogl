@@ -40,8 +40,8 @@ int main( void )
 	//glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_COMPAT_PROFILE); // So that glBegin/glVertex/glEnd work
 
 	// Open a window and create its OpenGL context
-	window = glfwCreateWindow( 1024, 768, "Tutorial 13 - Normal Mapping", NULL, NULL);
-	if( window == NULL ){
+	window = glfwCreateWindow( 1024, 768, "Tutorial 13 - Normal Mapping", nullptr, nullptr);
+	if( window == nullptr){
 		fprintf( stderr, "Failed to open GLFW window. If you have an Intel GPU, they are not 3.3 compatible. Try the 2.1 version of the tutorials.\n" );
 		getchar();
 		glfwTerminate();
@@ -173,7 +173,7 @@ int main( void )
 		nbFrames++;
 		if ( currentTime - lastTime >= 1.0 ){ // If last prinf() was more than 1sec ago
 			// printf and reset
-			printf("%f ms/frame\n", 1000.0/double(nbFrames));
+			printf("%f ms/frame\n", 1000.0/static_cast<double>(nbFrames));
 			nbFrames = 0;
 			lastTime += 1.0;
 		}
@@ -233,7 +233,8 @@ int main( void )
 			GL_FLOAT,           // type
 			GL_FALSE,           // normalized?
 			0,                  // stride
-			(void*)0            // array buffer offset
+			static_cast<void*>(nullptr // array buffer offset
+			)            // array buffer offset
 		);
 
 		// 2nd attribute buffer : UVs
@@ -245,7 +246,8 @@ int main( void )
 			GL_FLOAT,                         // type
 			GL_FALSE,                         // normalized?
 			0,                                // stride
-			(void*)0                          // array buffer offset
+			static_cast<void*>(nullptr // array buffer offset
+			)                          // array buffer offset
 		);
 
 		// 3rd attribute buffer : normals
@@ -257,7 +259,8 @@ int main( void )
 			GL_FLOAT,                         // type
 			GL_FALSE,                         // normalized?
 			0,                                // stride
-			(void*)0                          // array buffer offset
+			static_cast<void*>(nullptr // array buffer offset
+			)                          // array buffer offset
 		);
 
 		// 4th attribute buffer : tangents
@@ -269,7 +272,8 @@ int main( void )
 			GL_FLOAT,                         // type
 			GL_FALSE,                         // normalized?
 			0,                                // stride
-			(void*)0                          // array buffer offset
+			static_cast<void*>(nullptr // array buffer offset
+			)                          // array buffer offset
 		);
 
 		// 5th attribute buffer : bitangents
@@ -281,7 +285,8 @@ int main( void )
 			GL_FLOAT,                         // type
 			GL_FALSE,                         // normalized?
 			0,                                // stride
-			(void*)0                          // array buffer offset
+			static_cast<void*>(nullptr // array buffer offset
+			)                          // array buffer offset
 		);
 
 		// Index buffer
@@ -292,7 +297,7 @@ int main( void )
 			GL_TRIANGLES,      // mode
 			indices.size(),    // count
 			GL_UNSIGNED_SHORT, // type
-			(void*)0           // element array buffer offset
+			(void*)nullptr           // element array buffer offset
 		);
 
 		glDisableVertexAttribArray(0);

@@ -12,6 +12,26 @@
       <file path="$PROJECT_DIR$/.cache" />
       <file path="$PROJECT_DIR$/build" />
       <file path="$PROJECT_DIR$/distrib" />
+      <file path="$PROJECT_DIR$/examples/misc01_math_cheatsheet/screenshots" />
+      <file path="$PROJECT_DIR$/examples/misc05_picking/screenshots" />
+      <file path="$PROJECT_DIR$/examples/tutorial01_first_window/screenshots" />
+      <file path="$PROJECT_DIR$/examples/tutorial02_red_triangle/screenshots" />
+      <file path="$PROJECT_DIR$/examples/tutorial03_matrices/screenshots" />
+      <file path="$PROJECT_DIR$/examples/tutorial04_colored_cube/screenshots" />
+      <file path="$PROJECT_DIR$/examples/tutorial05_textured_cube/screenshots" />
+      <file path="$PROJECT_DIR$/examples/tutorial06_keyboard_and_mouse/screenshots" />
+      <file path="$PROJECT_DIR$/examples/tutorial07_model_loading/screenshots" />
+      <file path="$PROJECT_DIR$/examples/tutorial08_basic_shading/screenshots" />
+      <file path="$PROJECT_DIR$/examples/tutorial09_vbo_indexing/screenshots" />
+      <file path="$PROJECT_DIR$/examples/tutorial10_transparency/screenshots" />
+      <file path="$PROJECT_DIR$/examples/tutorial11_2d_fonts/screenshots" />
+      <file path="$PROJECT_DIR$/examples/tutorial12_extensions/screenshots" />
+      <file path="$PROJECT_DIR$/examples/tutorial13_normal_mapping/screenshots" />
+      <file path="$PROJECT_DIR$/examples/tutorial14_render_to_texture/screenshots" />
+      <file path="$PROJECT_DIR$/examples/tutorial15_lightmaps/screenshots" />
+      <file path="$PROJECT_DIR$/examples/tutorial16_shadowmaps/screenshots" />
+      <file path="$PROJECT_DIR$/examples/tutorial17_rotations/screenshots" />
+      <file path="$PROJECT_DIR$/examples/tutorial18_billboards_and_particles/screenshots" />
     </excludeRoots>
   </component>
 </project>

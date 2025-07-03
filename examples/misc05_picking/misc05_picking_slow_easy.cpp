@@ -44,8 +44,8 @@ int main( void )
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 	// Open a window and create its OpenGL context
-	window = glfwCreateWindow( 1024, 768, "Misc 05 - Simple but slow version", NULL, NULL);
-	if( window == NULL ){
+	window = glfwCreateWindow( 1024, 768, "Misc 05 - Simple but slow version", nullptr, nullptr);
+	if( window == nullptr){
 		fprintf( stderr, "Failed to open GLFW window. If you have an Intel GPU, they are not 3.3 compatible. Try the 2.1 version of the tutorials.\n" );
 		getchar();
 		glfwTerminate();
@@ -63,12 +63,12 @@ int main( void )
 	}
 
 	// Initialize the GUI
-	TwInit(TW_OPENGL_CORE, NULL);
+	TwInit(TW_OPENGL_CORE, nullptr);
 	TwWindowSize(1024, 768);
 	TwBar * GUI = TwNewBar("Picking");
-	TwSetParam(GUI, NULL, "refresh", TW_PARAM_CSTRING, 1, "0.1");
+	TwSetParam(GUI, nullptr, "refresh", TW_PARAM_CSTRING, 1, "0.1");
 	std::string message;
-	TwAddVarRW(GUI, "Last picked object", TW_TYPE_STDSTRING, &message, NULL);
+	TwAddVarRW(GUI, "Last picked object", TW_TYPE_STDSTRING, &message, nullptr);
 
 	// Ensure we can capture the escape key being pressed below
 	glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
@@ -173,7 +173,7 @@ int main( void )
 		nbFrames++;
 		if ( currentTime - lastTime >= 1.0 ){ // If last prinf() was more than 1sec ago
 			// printf and reset
-			printf("%f ms/frame\n", 1000.0/double(nbFrames));
+			printf("%f ms/frame\n", 1000.0/static_cast<double>(nbFrames));
 			nbFrames = 0;
 			lastTime += 1.0;
 		}
@@ -229,7 +229,8 @@ int main( void )
 					GL_FLOAT,           // type
 					GL_FALSE,           // normalized?
 					0,                  // stride
-					(void*)0            // array buffer offset
+					static_cast<void*>(nullptr // array buffer offset
+					)            // array buffer offset
 				);
 
 				// Index buffer
@@ -240,7 +241,7 @@ int main( void )
 					GL_TRIANGLES,      // mode
 					indices.size(),    // count
 					GL_UNSIGNED_SHORT,   // type
-					(void*)0           // element array buffer offset
+					(void*)nullptr           // element array buffer offset
 				);
 
 			}
@@ -332,7 +333,8 @@ int main( void )
 				GL_FLOAT,           // type
 				GL_FALSE,           // normalized?
 				0,                  // stride
-				(void*)0            // array buffer offset
+				static_cast<void*>(nullptr // array buffer offset
+				)            // array buffer offset
 			);
 
 			// 2nd attribute buffer : UVs
@@ -343,7 +345,8 @@ int main( void )
 				GL_FLOAT,                         // type
 				GL_FALSE,                         // normalized?
 				0,                                // stride
-				(void*)0                          // array buffer offset
+				static_cast<void*>(nullptr // array buffer offset
+				)                          // array buffer offset
 			);
 
 			// 3rd attribute buffer : normals
@@ -354,7 +357,8 @@ int main( void )
 				GL_FLOAT,                         // type
 				GL_FALSE,                         // normalized?
 				0,                                // stride
-				(void*)0                          // array buffer offset
+				static_cast<void*>(nullptr // array buffer offset
+				)                          // array buffer offset
 			);
 
 			// Index buffer
@@ -365,7 +369,7 @@ int main( void )
 				GL_TRIANGLES,      // mode
 				indices.size(),    // count
 				GL_UNSIGNED_SHORT,   // type
-				(void*)0           // element array buffer offset
+				(void*)nullptr           // element array buffer offset
 			);
 
 

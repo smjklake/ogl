@@ -57,8 +57,8 @@ int main( void )
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
  
 	// Open a window and create its OpenGL context
-	window = glfwCreateWindow( 1024, 768, "Tutorial 17 - Rotations", NULL, NULL);
-	if( window == NULL ){
+	window = glfwCreateWindow( 1024, 768, "Tutorial 17 - Rotations", nullptr, nullptr);
+	if( window == nullptr){
 		fprintf( stderr, "Failed to open GLFW window. If you have an Intel GPU, they are not 3.3 compatible. Try the 2.1 version of the tutorials.\n" );
 		getchar();
 		glfwTerminate();
@@ -76,12 +76,12 @@ int main( void )
 	}
  
 	// Initialize the GUI
-	TwInit(TW_OPENGL_CORE, NULL);
+	TwInit(TW_OPENGL_CORE, nullptr);
 	TwWindowSize(1024, 768);
 	TwBar * EulerGUI = TwNewBar("Euler settings");
 	TwBar * QuaternionGUI = TwNewBar("Quaternion settings");
-	TwSetParam(EulerGUI, NULL, "refresh", TW_PARAM_CSTRING, 1, "0.1");
-	TwSetParam(QuaternionGUI, NULL, "position", TW_PARAM_CSTRING, 1, "808 16");
+	TwSetParam(EulerGUI, nullptr, "refresh", TW_PARAM_CSTRING, 1, "0.1");
+	TwSetParam(QuaternionGUI, nullptr, "position", TW_PARAM_CSTRING, 1, "808 16");
 
 	TwAddVarRW(EulerGUI, "Euler X", TW_TYPE_FLOAT, &gOrientation1.x, "step=0.01");
 	TwAddVarRW(EulerGUI, "Euler Y", TW_TYPE_FLOAT, &gOrientation1.y, "step=0.01");
@@ -94,11 +94,11 @@ int main( void )
 	TwAddVarRW(QuaternionGUI, "Use LookAt", TW_TYPE_BOOL8 , &gLookAtOther, "help='Look at the other monkey ?'");
  
 	// Set GLFW event callbacks. I removed glfwSetWindowSizeCallback for conciseness
-	glfwSetMouseButtonCallback(window, (GLFWmousebuttonfun)TwEventMouseButtonGLFW); // - Directly redirect GLFW mouse button events to AntTweakBar
-	glfwSetCursorPosCallback(window, (GLFWcursorposfun)TwEventMousePosGLFW);          // - Directly redirect GLFW mouse position events to AntTweakBar
-	glfwSetScrollCallback(window, (GLFWscrollfun)TwEventMouseWheelGLFW);    // - Directly redirect GLFW mouse wheel events to AntTweakBar
-	glfwSetKeyCallback(window, (GLFWkeyfun)TwEventKeyGLFW);                         // - Directly redirect GLFW key events to AntTweakBar
-	glfwSetCharCallback(window, (GLFWcharfun)TwEventCharGLFW);                      // - Directly redirect GLFW char events to AntTweakBar
+	glfwSetMouseButtonCallback(window, reinterpret_cast<GLFWmousebuttonfun>(TwEventMouseButtonGLFW)); // - Directly redirect GLFW mouse button events to AntTweakBar
+	glfwSetCursorPosCallback(window, reinterpret_cast<GLFWcursorposfun>(TwEventMousePosGLFW));          // - Directly redirect GLFW mouse position events to AntTweakBar
+	glfwSetScrollCallback(window, reinterpret_cast<GLFWscrollfun>(TwEventMouseWheelGLFW));    // - Directly redirect GLFW mouse wheel events to AntTweakBar
+	glfwSetKeyCallback(window, reinterpret_cast<GLFWkeyfun>(TwEventKeyGLFW));                         // - Directly redirect GLFW key events to AntTweakBar
+	glfwSetCharCallback(window, reinterpret_cast<GLFWcharfun>(TwEventCharGLFW));                      // - Directly redirect GLFW char events to AntTweakBar
  
  
 	// Ensure we can capture the escape key being pressed below
@@ -188,12 +188,12 @@ int main( void )
  
 		// Measure speed
 		double currentTime = glfwGetTime();
-		float deltaTime = (float)(currentTime - lastFrameTime); 
+		float deltaTime = static_cast<float>(currentTime - lastFrameTime);
 		lastFrameTime = currentTime;
 		nbFrames++;
 		if ( currentTime - lastTime >= 1.0 ){ // If last prinf() was more than 1sec ago
 			// printf and reset
-			printf("%f ms/frame\n", 1000.0/double(nbFrames));
+			printf("%f ms/frame\n", 1000.0/static_cast<double>(nbFrames));
 			nbFrames = 0;
 			lastTime += 1.0;
 		}
@@ -226,7 +226,8 @@ int main( void )
 			GL_FLOAT,                     // type
 			GL_FALSE,                     // normalized?
 			0,                            // stride
-			(void*)0                      // array buffer offset
+			static_cast<void*>(nullptr // array buffer offset
+			)                      // array buffer offset
 		);
  
 		// 2nd attribute buffer : UVs
@@ -238,7 +239,8 @@ int main( void )
 			GL_FLOAT,                     // type
 			GL_FALSE,                     // normalized?
 			0,                            // stride
-			(void*)0                      // array buffer offset
+			static_cast<void*>(nullptr // array buffer offset
+			)                      // array buffer offset
 		);
  
 		// 3rd attribute buffer : normals
@@ -250,7 +252,8 @@ int main( void )
 			GL_FLOAT,                     // type
 			GL_FALSE,                     // normalized?
 			0,                            // stride
-			(void*)0                      // array buffer offset
+			static_cast<void*>(nullptr // array buffer offset
+			)                      // array buffer offset
 		);
  
 		// Index buffer
@@ -285,7 +288,7 @@ int main( void )
 				GL_TRIANGLES,      // mode
 				indices.size(),    // count
 				GL_UNSIGNED_SHORT,   // type
-				(void*)0           // element array buffer offset
+				(void*)nullptr           // element array buffer offset
 			);
  
 		}
@@ -322,7 +325,7 @@ int main( void )
 				GL_TRIANGLES,      // mode
 				indices.size(),    // count
 				GL_UNSIGNED_SHORT,   // type
-				(void*)0           // element array buffer offset
+				(void*)nullptr           // element array buffer offset
 			);
 		}
  

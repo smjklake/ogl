@@ -35,7 +35,7 @@ struct Particle
 };
 
 const auto TutorialSourcePath = "../tutorial18_billboards_and_particles/";
-const int MaxParticles = 100000;
+constexpr int MaxParticles = 100000;
 Particle ParticlesContainer[MaxParticles];
 int LastUsedParticle = 0;
 
@@ -87,8 +87,8 @@ int main(void)
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
     // Open a window and create its OpenGL context
-    window = glfwCreateWindow(1024, 768, "Tutorial 18 - Particles", NULL, NULL);
-    if (window == NULL)
+    window = glfwCreateWindow(1024, 768, "Tutorial 18 - Particles", nullptr, nullptr);
+    if (window == nullptr)
     {
         fprintf(
             stderr,
@@ -138,15 +138,15 @@ int main(void)
     sprintf(vertexShaderPath, "%s%s", TutorialSourcePath, "Billboard.vertexshader");
     sprintf(fragmentShaderPath, "%s%s", TutorialSourcePath, "Billboard.fragmentshader");
 
-    GLuint programID = LoadShaders(vertexShaderPath, fragmentShaderPath);
+    const GLuint programID = LoadShaders(vertexShaderPath, fragmentShaderPath);
 
     // Vertex shader
-    GLuint CameraRight_worldspace_ID = glGetUniformLocation(programID, "CameraRight_worldspace");
-    GLuint CameraUp_worldspace_ID = glGetUniformLocation(programID, "CameraUp_worldspace");
-    GLuint ViewProjMatrixID = glGetUniformLocation(programID, "VP");
+    const GLuint CameraRight_worldspace_ID = glGetUniformLocation(programID, "CameraRight_worldspace");
+    const GLuint CameraUp_worldspace_ID = glGetUniformLocation(programID, "CameraUp_worldspace");
+    const GLuint ViewProjMatrixID = glGetUniformLocation(programID, "VP");
 
     // fragment shader
-    GLuint TextureID = glGetUniformLocation(programID, "myTextureSampler");
+    const GLuint TextureID = glGetUniformLocation(programID, "myTextureSampler");
 
 
     static GLfloat* g_particule_position_size_data = new GLfloat[MaxParticles * 4];
@@ -162,11 +162,11 @@ int main(void)
 
     sprintf(particleDDSPath, "%s%s", TutorialSourcePath, "particle.DDS");
 
-    GLuint Texture = loadDDS(particleDDSPath);
+    const GLuint Texture = loadDDS(particleDDSPath);
 
     // The VBO containing the 4 vertices of the particles.
     // Thanks to instancing, they will be shared by all particles.
-    static const GLfloat g_vertex_buffer_data[] = {
+    static constexpr GLfloat g_vertex_buffer_data[] = {
         -0.5f, -0.5f, 0.0f,
         0.5f, -0.5f, 0.0f,
         -0.5f, 0.5f, 0.0f,
@@ -182,14 +182,14 @@ int main(void)
     glGenBuffers(1, &particles_position_buffer);
     glBindBuffer(GL_ARRAY_BUFFER, particles_position_buffer);
     // Initialize with empty (NULL) buffer : it will be updated later, each frame.
-    glBufferData(GL_ARRAY_BUFFER, MaxParticles * 4 * sizeof(GLfloat), NULL, GL_STREAM_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, MaxParticles * 4 * sizeof(GLfloat), nullptr, GL_STREAM_DRAW);
 
     // The VBO containing the colors of the particles
     GLuint particles_color_buffer;
     glGenBuffers(1, &particles_color_buffer);
     glBindBuffer(GL_ARRAY_BUFFER, particles_color_buffer);
     // Initialize with empty (NULL) buffer : it will be updated later, each frame.
-    glBufferData(GL_ARRAY_BUFFER, MaxParticles * 4 * sizeof(GLubyte), NULL, GL_STREAM_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, MaxParticles * 4 * sizeof(GLubyte), nullptr, GL_STREAM_DRAW);
 
 
     double lastTime = glfwGetTime();
@@ -198,8 +198,8 @@ int main(void)
         // Clear the screen
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        double currentTime = glfwGetTime();
-        double delta = currentTime - lastTime;
+        const double currentTime = glfwGetTime();
+        const double delta = currentTime - lastTime;
         lastTime = currentTime;
 
 
@@ -219,13 +219,13 @@ int main(void)
         // Generate 10 new particle each millisecond,
         // but limit this to 16 ms (60 fps), or if you have 1 long frame (1sec),
         // new particles will be huge and the next frame even longer.
-        int newparticles = (int)(delta * 10000.0);
-        if (newparticles > (int)(0.016f * 10000.0))
-            newparticles = (int)(0.016f * 10000.0);
+        int newparticles = static_cast<int>(delta * 10000.0);
+        if (newparticles > static_cast<int>(0.016f * 10000.0))
+            newparticles = static_cast<int>(0.016f * 10000.0);
 
         for (int i = 0; i < newparticles; i++)
         {
-            int particleIndex = FindUnusedParticle();
+            const int particleIndex = FindUnusedParticle();
             ParticlesContainer[particleIndex].life = 5.0f; // This particle will live 5 seconds.
             ParticlesContainer[particleIndex].pos = glm::vec3(0, 0, -20.0f);
 
@@ -266,8 +266,8 @@ int main(void)
                 if (p.life > 0.0f)
                 {
                     // Simulate simple physics : gravity only, no collisions
-                    p.speed += glm::vec3(0.0f, -9.81f, 0.0f) * (float)delta * 0.5f;
-                    p.pos += p.speed * (float)delta;
+                    p.speed += glm::vec3(0.0f, -9.81f, 0.0f) * static_cast<float>(delta) * 0.5f;
+                    p.pos += p.speed * static_cast<float>(delta);
                     p.cameradistance = glm::length2(p.pos - CameraPosition);
                     //ParticlesContainer[i].pos += glm::vec3(0.0f,10.0f, 0.0f) * (float)delta;
 
@@ -303,12 +303,12 @@ int main(void)
         // http://www.opengl.org/wiki/Buffer_Object_Streaming
 
         glBindBuffer(GL_ARRAY_BUFFER, particles_position_buffer);
-        glBufferData(GL_ARRAY_BUFFER, MaxParticles * 4 * sizeof(GLfloat), NULL, GL_STREAM_DRAW);
+        glBufferData(GL_ARRAY_BUFFER, MaxParticles * 4 * sizeof(GLfloat), nullptr, GL_STREAM_DRAW);
         // Buffer orphaning, a common way to improve streaming perf. See above link for details.
         glBufferSubData(GL_ARRAY_BUFFER, 0, ParticlesCount * sizeof(GLfloat) * 4, g_particule_position_size_data);
 
         glBindBuffer(GL_ARRAY_BUFFER, particles_color_buffer);
-        glBufferData(GL_ARRAY_BUFFER, MaxParticles * 4 * sizeof(GLubyte), NULL, GL_STREAM_DRAW);
+        glBufferData(GL_ARRAY_BUFFER, MaxParticles * 4 * sizeof(GLubyte), nullptr, GL_STREAM_DRAW);
         // Buffer orphaning, a common way to improve streaming perf. See above link for details.
         glBufferSubData(GL_ARRAY_BUFFER, 0, ParticlesCount * sizeof(GLubyte) * 4, g_particule_color_data);
 
@@ -340,7 +340,8 @@ int main(void)
             GL_FLOAT, // type
             GL_FALSE, // normalized?
             0, // stride
-            (void*)0 // array buffer offset
+            static_cast<void*>(nullptr // array buffer offset
+            ) // array buffer offset
         );
 
         // 2nd attribute buffer : positions of particles' centers
@@ -352,7 +353,8 @@ int main(void)
             GL_FLOAT, // type
             GL_FALSE, // normalized?
             0, // stride
-            (void*)0 // array buffer offset
+            static_cast<void*>(nullptr // array buffer offset
+            ) // array buffer offset
         );
 
         // 3rd attribute buffer : particles' colors
@@ -365,7 +367,8 @@ int main(void)
             GL_TRUE,
             // normalized?    *** YES, this means that the unsigned char[4] will be accessible with a vec4 (floats) in the shader ***
             0, // stride
-            (void*)0 // array buffer offset
+            static_cast<void*>(nullptr // array buffer offset
+            ) // array buffer offset
         );
 
         // These functions are specific to glDrawArrays*Instanced*.

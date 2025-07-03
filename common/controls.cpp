@@ -43,8 +43,8 @@ void computeMatricesFromInputs()
     static double lastTime = glfwGetTime();
 
     // Compute time difference between current and last frame
-    double currentTime = glfwGetTime();
-    auto deltaTime = static_cast<float>(currentTime - lastTime);
+    const double currentTime = glfwGetTime();
+    const auto deltaTime = static_cast<float>(currentTime - lastTime);
 
     // Get mouse position
     double xpos, ypos;
@@ -58,21 +58,21 @@ void computeMatricesFromInputs()
     verticalAngle += mouseSpeed * static_cast<float>(768.0f / 2 - ypos);
 
     // Direction: Spherical coordinates to Cartesian coordinates conversion
-    glm::vec3 direction(
+    const glm::vec3 direction(
         cos(verticalAngle) * sin(horizontalAngle),
         sin(verticalAngle),
         cos(verticalAngle) * cos(horizontalAngle)
     );
 
     // Right vector
-    glm::vec3 right = glm::vec3(
+    const glm::vec3 right = glm::vec3(
         sin(horizontalAngle - 3.14f / 2.0f),
         0,
         cos(horizontalAngle - 3.14f / 2.0f)
     );
 
     // Up vector
-    glm::vec3 up = glm::cross(right, direction);
+    const glm::vec3 up = glm::cross(right, direction);
 
     // Move forward
     if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
@@ -95,7 +95,7 @@ void computeMatricesFromInputs()
         position -= right * deltaTime * speed;
     }
 
-    float FoV = initialFoV;
+    const float FoV = initialFoV;
     // - 5 * glfwGetMouseWheel(); // Now GLFW 3 requires setting up a callback for this. It's a bit too complicated for this beginner's tutorial, so it's disabled instead.
 
     // Projection matrix: 45� Field of View, 4:3 ratio, display range: 0.1 unit <-> 100 units

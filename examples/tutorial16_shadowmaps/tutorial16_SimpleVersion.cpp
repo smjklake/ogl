@@ -38,8 +38,8 @@ int main( void )
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 	// Open a window and create its OpenGL context
-	window = glfwCreateWindow( 1024, 768, "Tutorial 16 - Shadows, Simple version", NULL, NULL);
-	if( window == NULL ){
+	window = glfwCreateWindow( 1024, 768, "Tutorial 16 - Shadows, Simple version", nullptr, nullptr);
+	if( window == nullptr){
 		fprintf( stderr, "Failed to open GLFW window. If you have an Intel GPU, they are not 3.3 compatible. Try the 2.1 version of the tutorials.\n" );
 		getchar();
 		glfwTerminate();
@@ -88,13 +88,13 @@ int main( void )
 	glBindVertexArray(VertexArrayID);
 
 	// Create and compile our GLSL program from the shaders
-	GLuint depthProgramID = LoadShaders( "DepthRTT.vertexshader", "DepthRTT.fragmentshader" );
+	const GLuint depthProgramID = LoadShaders( "DepthRTT.vertexshader", "DepthRTT.fragmentshader" );
 
 	// Get a handle for our "MVP" uniform
-	GLuint depthMatrixID = glGetUniformLocation(depthProgramID, "depthMVP");
+	const GLuint depthMatrixID = glGetUniformLocation(depthProgramID, "depthMVP");
 
 	// Load the texture
-	GLuint Texture = loadDDS("uvmap.DDS");
+	const GLuint Texture = loadDDS("uvmap.DDS");
 	
 	// Read our .obj file
 	std::vector<glm::vec3> vertices;
@@ -145,7 +145,7 @@ int main( void )
 	GLuint depthTexture;
 	glGenTextures(1, &depthTexture);
 	glBindTexture(GL_TEXTURE_2D, depthTexture);
-	glTexImage2D(GL_TEXTURE_2D, 0,GL_DEPTH_COMPONENT16, 1024, 1024, 0,GL_DEPTH_COMPONENT, GL_FLOAT, 0);
+	glTexImage2D(GL_TEXTURE_2D, 0,GL_DEPTH_COMPONENT16, 1024, 1024, 0,GL_DEPTH_COMPONENT, GL_FLOAT, nullptr);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR); 
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
@@ -163,15 +163,15 @@ int main( void )
 		return false;
 
 	// Create and compile our GLSL program from the shaders
-	GLuint programID = LoadShaders( "ShadowMapping_SimpleVersion.vertexshader", "ShadowMapping_SimpleVersion.fragmentshader" );
+	const GLuint programID = LoadShaders( "ShadowMapping_SimpleVersion.vertexshader", "ShadowMapping_SimpleVersion.fragmentshader" );
 
 	// Get a handle for our "myTextureSampler" uniform
-	GLuint TextureID  = glGetUniformLocation(programID, "myTextureSampler");
+	const GLuint TextureID  = glGetUniformLocation(programID, "myTextureSampler");
 
 	// Get a handle for our "MVP" uniform
-	GLuint MatrixID = glGetUniformLocation(programID, "MVP");
-	GLuint DepthBiasID = glGetUniformLocation(programID, "DepthBiasMVP");
-	GLuint ShadowMapID = glGetUniformLocation(programID, "shadowMap");
+	const GLuint MatrixID = glGetUniformLocation(programID, "MVP");
+	const GLuint DepthBiasID = glGetUniformLocation(programID, "DepthBiasMVP");
+	const GLuint ShadowMapID = glGetUniformLocation(programID, "shadowMap");
 		
 	do{
 
@@ -217,7 +217,8 @@ int main( void )
 			GL_FLOAT,           // type
 			GL_FALSE,           // normalized?
 			0,                  // stride
-			(void*)0            // array buffer offset
+			static_cast<void*>(nullptr // array buffer offset
+			)            // array buffer offset
 		);
 
 		// Index buffer
@@ -228,7 +229,7 @@ int main( void )
 			GL_TRIANGLES,      // mode
 			indices.size(),    // count
 			GL_UNSIGNED_SHORT, // type
-			(void*)0           // element array buffer offset
+			(void*)nullptr           // element array buffer offset
 		);
 
 		glDisableVertexAttribArray(0);
@@ -289,7 +290,8 @@ int main( void )
 			GL_FLOAT,           // type
 			GL_FALSE,           // normalized?
 			0,                  // stride
-			(void*)0            // array buffer offset
+			static_cast<void*>(nullptr // array buffer offset
+			)            // array buffer offset
 		);
 
 		// 2nd attribute buffer : UVs
@@ -301,7 +303,8 @@ int main( void )
 			GL_FLOAT,                         // type
 			GL_FALSE,                         // normalized?
 			0,                                // stride
-			(void*)0                          // array buffer offset
+			static_cast<void*>(nullptr // array buffer offset
+			)                          // array buffer offset
 		);
 
 		// 3rd attribute buffer : normals
@@ -313,7 +316,8 @@ int main( void )
 			GL_FLOAT,                         // type
 			GL_FALSE,                         // normalized?
 			0,                                // stride
-			(void*)0                          // array buffer offset
+			static_cast<void*>(nullptr // array buffer offset
+			)                          // array buffer offset
 		);
 
 		// Index buffer
@@ -324,7 +328,7 @@ int main( void )
 			GL_TRIANGLES,      // mode
 			indices.size(),    // count
 			GL_UNSIGNED_SHORT, // type
-			(void*)0           // element array buffer offset
+			(void*)nullptr           // element array buffer offset
 		);
 
 		glDisableVertexAttribArray(0);

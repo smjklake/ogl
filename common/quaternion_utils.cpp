@@ -12,7 +12,7 @@ quat RotationBetweenVectors(vec3 start, vec3 dest){
 	start = normalize(start);
 	dest = normalize(dest);
 
-	float cosTheta = dot(start, dest);
+	const float cosTheta = dot(start, dest);
 	vec3 rotationAxis;
 
 	if (cosTheta < -1 + 0.001f){
@@ -32,8 +32,8 @@ quat RotationBetweenVectors(vec3 start, vec3 dest){
 	// Implementation from Stan Melax's Game Programming Gems 1 article
 	rotationAxis = cross(start, dest);
 
-	float s = sqrt( (1+cosTheta)*2 );
-	float invs = 1 / s;
+	const float s = sqrt( (1+cosTheta)*2 );
+	const float invs = 1 / s;
 
 	return quat(
 		s * 0.5f,
@@ -51,23 +51,23 @@ quat RotationBetweenVectors(vec3 start, vec3 dest){
 // Similar to RotationBetweenVectors, but also controls the vertical orientation.
 // This assumes that at rest, the object faces +Z.
 // Beware, the first parameter is a direction, not the target point !
-quat LookAt(vec3 direction, vec3 desiredUp){
+quat LookAt(const vec3 direction, vec3 desiredUp){
 
 	if (length2(direction) < 0.0001f )
 		return quat();
 
 	// Recompute desiredUp so that it's perpendicular to the direction
 	// You can skip that part if you really want to force desiredUp
-	vec3 right = cross(direction, desiredUp);
+	const vec3 right = cross(direction, desiredUp);
 	desiredUp = cross(right, direction);
 
 	// Find the rotation between the front of the object (that we assume towards +Z,
 	// but this depends on your model) and the desired direction
-	quat rot1 = RotationBetweenVectors(vec3(0.0f, 0.0f, 1.0f), direction);
+	const quat rot1 = RotationBetweenVectors(vec3(0.0f, 0.0f, 1.0f), direction);
 	// Because of the 1rst rotation, the up is probably completely screwed up.
 	// Find the rotation between the "up" of the rotated object, and the desired up
-	vec3 newUp = rot1 * vec3(0.0f, 1.0f, 0.0f);
-	quat rot2 = RotationBetweenVectors(newUp, desiredUp);
+	const vec3 newUp = rot1 * vec3(0.0f, 1.0f, 0.0f);
+	const quat rot2 = RotationBetweenVectors(newUp, desiredUp);
 
 	// Apply them
 	return rot2 * rot1; // remember, in reverse order.
@@ -77,7 +77,7 @@ quat LookAt(vec3 direction, vec3 desiredUp){
 
 // Like SLERP, but forbids rotation greater than maxAngle (in radians)
 // In conjunction to LookAt, can make your characters
-quat RotateTowards(quat q1, quat q2, float maxAngle){
+quat RotateTowards(quat q1, const quat q2, const float maxAngle){
 
 	if( maxAngle < 0.001f ){
 		// No rotation allowed. Prevent dividing by 0 later.
@@ -107,7 +107,7 @@ quat RotateTowards(quat q1, quat q2, float maxAngle){
 	}
 
 	// This is just like slerp(), but with a custom t
-	float t = maxAngle / angle;
+	const float t = maxAngle / angle;
 	angle = maxAngle;
 
 	quat res = (sin((1.0f - t) * angle) * q1 + sin(t * angle) * q2) / sin(angle);

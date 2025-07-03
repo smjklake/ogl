@@ -91,27 +91,27 @@ int main()
     sprintf(vertexShaderPath, "%s%s", TutorialSourcePath, "Billboard.vertexshader");
     sprintf(fragmentShaderPath, "%s%s", TutorialSourcePath, "Billboard.fragmentshader");
 
-    GLuint programID = LoadShaders(vertexShaderPath, fragmentShaderPath);
+    const GLuint programID = LoadShaders(vertexShaderPath, fragmentShaderPath);
 
     // Vertex shader
-    GLuint CameraRight_worldspace_ID = glGetUniformLocation(programID, "CameraRight_worldspace");
-    GLuint CameraUp_worldspace_ID = glGetUniformLocation(programID, "CameraUp_worldspace");
-    GLuint ViewProjMatrixID = glGetUniformLocation(programID, "VP");
-    GLuint BillboardPosID = glGetUniformLocation(programID, "BillboardPos");
-    GLuint BillboardSizeID = glGetUniformLocation(programID, "BillboardSize");
-    GLuint LifeLevelID = glGetUniformLocation(programID, "LifeLevel");
+    const GLuint CameraRight_worldspace_ID = glGetUniformLocation(programID, "CameraRight_worldspace");
+    const GLuint CameraUp_worldspace_ID = glGetUniformLocation(programID, "CameraUp_worldspace");
+    const GLuint ViewProjMatrixID = glGetUniformLocation(programID, "VP");
+    const GLuint BillboardPosID = glGetUniformLocation(programID, "BillboardPos");
+    const GLuint BillboardSizeID = glGetUniformLocation(programID, "BillboardSize");
+    const GLuint LifeLevelID = glGetUniformLocation(programID, "LifeLevel");
 
-    GLuint TextureID = glGetUniformLocation(programID, "myTextureSampler");
+    const GLuint TextureID = glGetUniformLocation(programID, "myTextureSampler");
 
 
     char DDSPath[256];
 
     sprintf(DDSPath, "%s%s", TutorialSourcePath, "ExampleBillboard.DDS");
 
-    GLuint Texture = loadDDS(DDSPath);
+    const GLuint Texture = loadDDS(DDSPath);
 
     // The VBO containing the 4 vertices of the particles.
-    static const GLfloat g_vertex_buffer_data[] = {
+    static constexpr GLfloat g_vertex_buffer_data[] = {
         -0.5f, -0.5f, 0.0f,
         0.5f, -0.5f, 0.0f,
         -0.5f, 0.5f, 0.0f,
@@ -124,10 +124,10 @@ int main()
 
 #ifdef DRAW_CUBE
     // Everything here comes from Tutorial 4
-    GLuint cubeProgramID = LoadShaders("../tutorial04_colored_cube/TransformVertexShader.vertexshader",
+    const GLuint cubeProgramID = LoadShaders("../tutorial04_colored_cube/TransformVertexShader.vertexshader",
                                        "../tutorial04_colored_cube/ColorFragmentShader.fragmentshader");
-    GLuint cubeMatrixID = glGetUniformLocation(cubeProgramID, "MVP");
-    static const GLfloat g_cube_vertex_buffer_data[] = {
+    const GLuint cubeMatrixID = glGetUniformLocation(cubeProgramID, "MVP");
+    static constexpr GLfloat g_cube_vertex_buffer_data[] = {
         -1.0f, -1.0f, -1.0f, -1.0f, -1.0f, 1.0f, -1.0f, 1.0f, 1.0f, 1.0f, 1.0f, -1.0f, -1.0f, -1.0f, -1.0f, -1.0f, 1.0f,
         -1.0f, 1.0f, -1.0f, 1.0f, -1.0f, -1.0f, -1.0f, 1.0f, -1.0f, -1.0f, 1.0f, 1.0f, -1.0f, 1.0f, -1.0f, -1.0f, -1.0f,
         -1.0f, -1.0f, -1.0f, -1.0f, -1.0f, -1.0f, 1.0f, 1.0f, -1.0f, 1.0f, -1.0f, 1.0f, -1.0f, 1.0f, -1.0f, -1.0f, 1.0f,
@@ -136,7 +136,7 @@ int main()
         -1.0f, -1.0f, 1.0f, -1.0f, 1.0f, 1.0f, 1.0f, -1.0f, 1.0f, -1.0f, -1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, -1.0f,
         1.0f, 1.0f, 1.0f, -1.0f, 1.0f
     };
-    static const GLfloat g_cube_color_buffer_data[] = {
+    static constexpr GLfloat g_cube_color_buffer_data[] = {
         0.583f, 0.771f, 0.014f, 0.609f, 0.115f, 0.436f, 0.327f, 0.483f, 0.844f, 0.822f, 0.569f, 0.201f, 0.435f, 0.602f,
         0.223f, 0.310f, 0.747f, 0.185f, 0.597f, 0.770f, 0.761f, 0.559f, 0.436f, 0.730f, 0.359f, 0.583f, 0.152f, 0.483f,
         0.596f, 0.789f, 0.559f, 0.861f, 0.639f, 0.195f, 0.548f, 0.859f, 0.014f, 0.184f, 0.576f, 0.771f, 0.328f, 0.970f,
@@ -162,7 +162,7 @@ int main()
         // Clear the screen
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        double currentTime = glfwGetTime();
+        const double currentTime = glfwGetTime();
         double delta = currentTime - lastTime;
         lastTime = currentTime;
 
@@ -182,10 +182,10 @@ int main()
         glUniformMatrix4fv(cubeMatrixID, 1, GL_FALSE, &cubeMVP[0][0]);
         glEnableVertexAttribArray(0);
         glBindBuffer(GL_ARRAY_BUFFER, cubevertexbuffer);
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)nullptr);
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, static_cast<void*>(nullptr));
         glEnableVertexAttribArray(1);
         glBindBuffer(GL_ARRAY_BUFFER, cubecolorbuffer);
-        glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, (void*)nullptr);
+        glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, static_cast<void*>(nullptr));
         glDrawArrays(GL_TRIANGLES, 0, 12 * 3);
         glDisableVertexAttribArray(0);
         glDisableVertexAttribArray(1);
@@ -225,7 +225,7 @@ int main()
         glUniform2f(BillboardSizeID, 1.0f, 0.125f); // and 1m*12cm, because it matches its 256*32 resolution =)
 
         // Generate some fake life level and send it to glsl
-        float LifeLevel = sin(currentTime) * 0.1f + 0.7f;
+        const float LifeLevel = sin(currentTime) * 0.1f + 0.7f;
         glUniform1f(LifeLevelID, LifeLevel);
 
         glUniformMatrix4fv(ViewProjMatrixID, 1, GL_FALSE, &ViewProjectionMatrix[0][0]);
@@ -239,7 +239,8 @@ int main()
             GL_FLOAT, // type
             GL_FALSE, // normalized?
             0, // stride
-            (void*)nullptr // array buffer offset
+            static_cast<void*>(nullptr // array buffer offset
+            ) // array buffer offset
         );
 
 
