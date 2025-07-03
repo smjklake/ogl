@@ -22,7 +22,7 @@ using namespace glm;
 #include <common/vboindexer.hpp>
 #include <common/tangentspace.hpp>
 
-int main( void )
+int main()
 {
 	// Initialize GLFW
 	if( !glfwInit() )
@@ -102,24 +102,24 @@ int main( void )
 	GLuint SpecularTextureID  = glGetUniformLocation(programID, "SpecularTextureSampler");
 
 	// Read our .obj file
-	std::vector<glm::vec3> vertices;
-	std::vector<glm::vec2> uvs;
-	std::vector<glm::vec3> normals;
+	std::vector<vec3> vertices;
+	std::vector<vec2> uvs;
+	std::vector<vec3> normals;
 	// bool res = loadOBJ("cylinder.obj", vertices, uvs, normals);
 
-	std::vector<glm::vec3> tangents;
-	std::vector<glm::vec3> bitangents;
+	std::vector<vec3> tangents;
+	std::vector<vec3> bitangents;
 	computeTangentBasis(
 		vertices, uvs, normals, // input
 		tangents, bitangents    // output
 	);
 
 	std::vector<unsigned short> indices;
-	std::vector<glm::vec3> indexed_vertices;
-	std::vector<glm::vec2> indexed_uvs;
-	std::vector<glm::vec3> indexed_normals;
-	std::vector<glm::vec3> indexed_tangents;
-	std::vector<glm::vec3> indexed_bitangents;
+	std::vector<vec3> indexed_vertices;
+	std::vector<vec2> indexed_uvs;
+	std::vector<vec3> indexed_normals;
+	std::vector<vec3> indexed_tangents;
+	std::vector<vec3> indexed_bitangents;
 	indexVBO_TBN(
 		vertices, uvs, normals, tangents, bitangents, 
 		indices, indexed_vertices, indexed_uvs, indexed_normals, indexed_tangents, indexed_bitangents
@@ -130,27 +130,27 @@ int main( void )
 	GLuint vertexbuffer;
 	glGenBuffers(1, &vertexbuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
-	glBufferData(GL_ARRAY_BUFFER, indexed_vertices.size() * sizeof(glm::vec3), &indexed_vertices[0], GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, indexed_vertices.size() * sizeof(vec3), &indexed_vertices[0], GL_STATIC_DRAW);
 
 	GLuint uvbuffer;
 	glGenBuffers(1, &uvbuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
-	glBufferData(GL_ARRAY_BUFFER, indexed_uvs.size() * sizeof(glm::vec2), &indexed_uvs[0], GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, indexed_uvs.size() * sizeof(vec2), &indexed_uvs[0], GL_STATIC_DRAW);
 
 	GLuint normalbuffer;
 	glGenBuffers(1, &normalbuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, normalbuffer);
-	glBufferData(GL_ARRAY_BUFFER, indexed_normals.size() * sizeof(glm::vec3), &indexed_normals[0], GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, indexed_normals.size() * sizeof(vec3), &indexed_normals[0], GL_STATIC_DRAW);
 
 	GLuint tangentbuffer;
 	glGenBuffers(1, &tangentbuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, tangentbuffer);
-	glBufferData(GL_ARRAY_BUFFER, indexed_tangents.size() * sizeof(glm::vec3), &indexed_tangents[0], GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, indexed_tangents.size() * sizeof(vec3), &indexed_tangents[0], GL_STATIC_DRAW);
 
 	GLuint bitangentbuffer;
 	glGenBuffers(1, &bitangentbuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, bitangentbuffer);
-	glBufferData(GL_ARRAY_BUFFER, indexed_bitangents.size() * sizeof(glm::vec3), &indexed_bitangents[0], GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, indexed_bitangents.size() * sizeof(vec3), &indexed_bitangents[0], GL_STATIC_DRAW);
 
 	// Generate a buffer for the indices as well
 	GLuint elementbuffer;
@@ -186,12 +186,12 @@ int main( void )
 
 		// Compute the MVP matrix from keyboard and mouse input
 		computeMatricesFromInputs();
-		glm::mat4 ProjectionMatrix = getProjectionMatrix();
-		glm::mat4 ViewMatrix = getViewMatrix();
-		auto ModelMatrix = glm::mat4(1.0);
-		glm::mat4 ModelViewMatrix = ViewMatrix * ModelMatrix;
-		auto ModelView3x3Matrix = glm::mat3(ModelViewMatrix);
-		glm::mat4 MVP = ProjectionMatrix * ViewMatrix * ModelMatrix;
+		mat4 ProjectionMatrix = getProjectionMatrix();
+		mat4 ViewMatrix = getViewMatrix();
+		auto ModelMatrix = mat4(1.0);
+		mat4 ModelViewMatrix = ViewMatrix * ModelMatrix;
+		auto ModelView3x3Matrix = mat3(ModelViewMatrix);
+		mat4 MVP = ProjectionMatrix * ViewMatrix * ModelMatrix;
 
 		// Send our transformation to the currently bound shader, 
 		// in the "MVP" uniform
@@ -202,7 +202,7 @@ int main( void )
 		glUniformMatrix3fv(ModelView3x3MatrixID, 1, GL_FALSE, &ModelView3x3Matrix[0][0]);
 
 
-		auto lightPos = glm::vec3(0,0,4);
+		auto lightPos = vec3(0,0,4);
 		glUniform3f(LightID, lightPos.x, lightPos.y, lightPos.z);
 
 		// Bind our diffuse texture in Texture Unit 0
@@ -317,7 +317,7 @@ int main( void )
 		glMatrixMode(GL_PROJECTION);
 		glLoadMatrixf(reinterpret_cast<const GLfloat*>(&ProjectionMatrix[0]));
 		glMatrixMode(GL_MODELVIEW);
-		glm::mat4 MV = ViewMatrix * ModelMatrix;
+		mat4 MV = ViewMatrix * ModelMatrix;
 		glLoadMatrixf(reinterpret_cast<const GLfloat*>(&MV[0]));
 
 
@@ -327,9 +327,9 @@ int main( void )
 		glColor3f(0,0,1);
 		glBegin(GL_LINES);
 		for (unsigned int i=0; i<indices.size(); i++){
-			glm::vec3 p = indexed_vertices[indices[i]];
+			vec3 p = indexed_vertices[indices[i]];
 			glVertex3fv(&p.x);
-			glm::vec3 o = glm::normalize(indexed_normals[indices[i]]);
+			vec3 o = normalize(indexed_normals[indices[i]]);
 			p+=o*0.1f;
 			glVertex3fv(&p.x);
 		}
@@ -338,9 +338,9 @@ int main( void )
 		glColor3f(1,0,0);
 		glBegin(GL_LINES);
 		for (unsigned int i=0; i<indices.size(); i++){
-			glm::vec3 p = indexed_vertices[indices[i]];
+			vec3 p = indexed_vertices[indices[i]];
 			glVertex3fv(&p.x);
-			glm::vec3 o = glm::normalize(indexed_tangents[indices[i]]);
+			vec3 o = normalize(indexed_tangents[indices[i]]);
 			p+=o*0.1f;
 			glVertex3fv(&p.x);
 		}
@@ -349,9 +349,9 @@ int main( void )
 		glColor3f(0,1,0);
 		glBegin(GL_LINES);
 		for (unsigned int i=0; i<indices.size(); i++){
-			glm::vec3 p = indexed_vertices[indices[i]];
+			vec3 p = indexed_vertices[indices[i]];
 			glVertex3fv(&p.x);
-			glm::vec3 o = glm::normalize(indexed_bitangents[indices[i]]);
+			vec3 o = normalize(indexed_bitangents[indices[i]]);
 			p+=o*0.1f;
 			glVertex3fv(&p.x);
 		}
@@ -360,11 +360,11 @@ int main( void )
 		glColor3f(1,1,1);
 		glBegin(GL_LINES);
 			glVertex3fv(&lightPos.x);
-			lightPos+=glm::vec3(1,0,0)*0.1f;
+			lightPos+=vec3(1,0,0)*0.1f;
 			glVertex3fv(&lightPos.x);
-			lightPos-=glm::vec3(1,0,0)*0.1f;
+			lightPos-=vec3(1,0,0)*0.1f;
 			glVertex3fv(&lightPos.x);
-			lightPos+=glm::vec3(0,1,0)*0.1f;
+			lightPos+=vec3(0,1,0)*0.1f;
 			glVertex3fv(&lightPos.x);
 		glEnd();
 

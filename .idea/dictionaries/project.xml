@@ -2,11 +2,16 @@
   <dictionary name="project">
     <words>
       <w>anttweakbar</w>
+      <w>apientry</w>
       <w>berglund</w>
       <w>bposition</w>
       <w>broadphase</w>
       <w>cameradistance</w>
       <w>cameraspace</w>
+      <w>cubecolorbuffer</w>
+      <w>cubemap</w>
+      <w>cubevertexbuffer</w>
+      <w>debugprocarb</w>
       <w>elementbuffer</w>
       <w>fragmentdepth</w>
       <w>fragmentshader</w>
@@ -14,6 +19,7 @@
       <w>glvnd</w>
       <w>homoneneousspace</w>
       <w>imagepath</w>
+      <w>inversing</w>
       <w>invs</w>
       <w>maindir</w>
       <w>matrixf</w>
@@ -32,6 +38,7 @@
       <w>rigidbodies</w>
       <w>rpavlik</w>
       <w>shadowmaps</w>
+      <w>sizei</w>
       <w>slerp</w>
       <w>tangentspace</w>
       <w>thickwalls</w>

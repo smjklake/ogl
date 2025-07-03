@@ -16,7 +16,7 @@ using namespace glm;
 
 #include <common/shader.hpp>
 
-int main( void )
+int main()
 {
 	// Initialize GLFW
 	if( !glfwInit() )

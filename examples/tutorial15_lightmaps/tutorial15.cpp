@@ -20,7 +20,7 @@ using namespace glm;
 #include <common/controls.hpp>
 #include <common/objloader.hpp>
 
-int main( void )
+int main()
 {
 	// Initialize GLFW
 	if( !glfwInit() )

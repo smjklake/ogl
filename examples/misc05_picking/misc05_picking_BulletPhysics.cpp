@@ -84,7 +84,7 @@ void ScreenPosToWorldRay(
 }
 
 
-int main( void )
+int main()
 {
 	// Initialize GLFW
 	if( !glfwInit() )
@@ -503,6 +503,6 @@ int main( void )
 //	virtual void setDebugMode(int p){
 //		m = p;
 //	}
-//	int getDebugMode(void) const {return 3;}
+//	int getDebugMode() const {return 3;}
 //	int m;
 //};

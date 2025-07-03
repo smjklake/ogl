@@ -14,7 +14,7 @@ using namespace glm;
 
 
 
-int main( void )
+int main()
 {
 #ifdef COMPILE_WITH_SOME_PREPROCESSOR_DIRECTIVE
 	printf("You checked the SOME_STUFF button in CMake !"); 

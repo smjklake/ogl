@@ -22,7 +22,7 @@ using namespace glm;
 #include <common/vboindexer.hpp>
 #include <common/text2D.hpp>
 
-int main( void )
+int main()
 {
 	// Initialize GLFW
 	if( !glfwInit() )
@@ -71,7 +71,7 @@ int main( void )
 
 	// Enable depth test
 	glEnable(GL_DEPTH_TEST);
-	// Accept fragment if it is closer to the camera than the former one
+	// Accept a fragment if it is closer to the camera than the former one
 	glDepthFunc(GL_LESS); 
 
 	// Cull triangles which normal is not towards the camera
@@ -146,7 +146,7 @@ int main( void )
 		// Measure speed
 		const double currentTime = glfwGetTime();
 		nbFrames++;
-		if ( currentTime - lastTime >= 1.0 ){ // If last prinf() was more than 1sec ago
+		if ( currentTime - lastTime >= 1.0 ){ // If last prinf() was more than 1sec ago,
 			// printf and reset
 			printf("%f ms/frame\n", 1000.0/static_cast<double>(nbFrames));
 			nbFrames = 0;
@@ -181,7 +181,7 @@ int main( void )
 		// Set our "myTextureSampler" sampler to use Texture Unit 0
 		glUniform1i(TextureID, 0);
 
-		// 1rst attribute buffer : vertices
+		// 1rst attribute buffer: vertices
 		glEnableVertexAttribArray(0);
 		glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
 		glVertexAttribPointer(
@@ -207,7 +207,7 @@ int main( void )
 			)                          // array buffer offset
 		);
 
-		// 3rd attribute buffer : normals
+		// 3rd attribute buffer: normals
 		glEnableVertexAttribArray(2);
 		glBindBuffer(GL_ARRAY_BUFFER, normalbuffer);
 		glVertexAttribPointer(
@@ -223,7 +223,7 @@ int main( void )
 		// Index buffer
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, elementbuffer);
 
-		// Draw the triangles !
+		// Draw the triangles!
 		glDrawElements(
 			GL_TRIANGLES,      // mode
 			indices.size(),    // count
@@ -259,7 +259,7 @@ int main( void )
 	// Delete the text's VBO, the shader and the texture
 	cleanupText2D();
 
-	// Close OpenGL window and terminate GLFW
+	// Close the OpenGL window and terminate GLFW
 	glfwTerminate();
 
 	return 0;

@@ -13,7 +13,7 @@ GLFWwindow* window;
 #include <glm/glm.hpp>
 using namespace glm;
 
-int main( void )
+int main()
 {
 	// Initialize GLFW
 	if( !glfwInit() )

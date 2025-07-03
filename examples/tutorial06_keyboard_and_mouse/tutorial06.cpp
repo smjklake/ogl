@@ -18,7 +18,7 @@ using namespace glm;
 #include <common/texture.hpp>
 #include <common/controls.hpp>
 
-int main( void )
+int main()
 {
 	// Initialize GLFW
 	if( !glfwInit() )
@@ -190,10 +190,10 @@ int main( void )
 
 		// Compute the MVP matrix from keyboard and mouse input
 		computeMatricesFromInputs();
-		glm::mat4 ProjectionMatrix = getProjectionMatrix();
-		glm::mat4 ViewMatrix = getViewMatrix();
-		auto ModelMatrix = glm::mat4(1.0);
-		glm::mat4 MVP = ProjectionMatrix * ViewMatrix * ModelMatrix;
+		mat4 ProjectionMatrix = getProjectionMatrix();
+		mat4 ViewMatrix = getViewMatrix();
+		auto ModelMatrix = mat4(1.0);
+		mat4 MVP = ProjectionMatrix * ViewMatrix * ModelMatrix;
 
 		// Send our transformation to the currently bound shader, 
 		// in the "MVP" uniform

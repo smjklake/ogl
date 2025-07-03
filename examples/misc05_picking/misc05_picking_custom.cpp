@@ -115,20 +115,20 @@ bool TestRayOBBIntersection(
 				float w=t1;t1=t2;t2=w; // swap t1 and t2
 			}
 
-			// tMax is the nearest "far" intersection (amongst the X,Y and Z planes pairs)
+			// tMax is the nearest "far" intersection (amongst the X, Y and Z planes pairs)
 			if ( t2 < tMax )
 				tMax = t2;
-			// tMin is the farthest "near" intersection (amongst the X,Y and Z planes pairs)
+			// tMin is the farthest "near" intersection (amongst the X, Y and Z planes pairs)
 			if ( t1 > tMin )
 				tMin = t1;
 
-			// And here's the trick :
+			// And here's the trick:
 			// If "far" is closer than "near", then there is NO intersection.
 			// See the images in the tutorials for the visual explanation.
 			if (tMax < tMin )
 				return false;
 
-		}else{ // Rare case : the ray is almost parallel to the planes, so they don't have any "intersection"
+		}else{ // Rare case: the ray is almost parallel to the planes, so they don't have any "intersection"
 			if(-e+aabb_min.x > 0.0f || -e+aabb_max.x < 0.0f)
 				return false;
 		}
@@ -193,7 +193,7 @@ bool TestRayOBBIntersection(
 
 }
 
-int main( void )
+int main()
 {
 	// Initialize GLFW
 	if( !glfwInit() )

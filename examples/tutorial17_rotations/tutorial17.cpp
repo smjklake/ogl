@@ -39,7 +39,7 @@ quat gOrientation2;
 bool gLookAtOther = true;
 
  
-int main( void )
+int main()
 {
  
 	// Initialize GLFW
@@ -141,15 +141,15 @@ int main( void )
 	GLuint TextureID  = glGetUniformLocation(programID, "myTextureSampler");
  
 	// Read our .obj file
-	std::vector<glm::vec3> vertices;
-	std::vector<glm::vec2> uvs;
-	std::vector<glm::vec3> normals;
+	std::vector<vec3> vertices;
+	std::vector<vec2> uvs;
+	std::vector<vec3> normals;
 	// bool res = loadOBJ("suzanne.obj", vertices, uvs, normals);
  
 	std::vector<unsigned short> indices;
-	std::vector<glm::vec3> indexed_vertices;
-	std::vector<glm::vec2> indexed_uvs;
-	std::vector<glm::vec3> indexed_normals;
+	std::vector<vec3> indexed_vertices;
+	std::vector<vec2> indexed_uvs;
+	std::vector<vec3> indexed_normals;
 	indexVBO(vertices, uvs, normals, indices, indexed_vertices, indexed_uvs, indexed_normals);
  
 	// Load it into a VBO
@@ -157,17 +157,17 @@ int main( void )
 	GLuint vertexbuffer;
 	glGenBuffers(1, &vertexbuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
-	glBufferData(GL_ARRAY_BUFFER, indexed_vertices.size() * sizeof(glm::vec3), &indexed_vertices[0], GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, indexed_vertices.size() * sizeof(vec3), &indexed_vertices[0], GL_STATIC_DRAW);
  
 	GLuint uvbuffer;
 	glGenBuffers(1, &uvbuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
-	glBufferData(GL_ARRAY_BUFFER, indexed_uvs.size() * sizeof(glm::vec2), &indexed_uvs[0], GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, indexed_uvs.size() * sizeof(vec2), &indexed_uvs[0], GL_STATIC_DRAW);
  
 	GLuint normalbuffer;
 	glGenBuffers(1, &normalbuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, normalbuffer);
-	glBufferData(GL_ARRAY_BUFFER, indexed_normals.size() * sizeof(glm::vec3), &indexed_normals[0], GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, indexed_normals.size() * sizeof(vec3), &indexed_normals[0], GL_STATIC_DRAW);
  
 	// Generate a buffer for the indices as well
 	GLuint elementbuffer;
@@ -204,11 +204,11 @@ int main( void )
 		// Use our shader
 		glUseProgram(programID);
  
-		glm::mat4 ProjectionMatrix = glm::perspective(glm::radians(45.0f), 4.0f / 3.0f, 0.1f, 100.0f);
-		glm::mat4 ViewMatrix = glm::lookAt(
-			glm::vec3( 0, 0, 7 ), // Camera is here
-			glm::vec3( 0, 0, 0 ), // and looks here
-			glm::vec3( 0, 1, 0 )  // Head is up (set to 0,-1,0 to look upside-down)
+		mat4 ProjectionMatrix = perspective(radians(45.0f), 4.0f / 3.0f, 0.1f, 100.0f);
+		mat4 ViewMatrix = lookAt(
+			vec3( 0, 0, 7 ), // Camera is here
+			vec3( 0, 0, 0 ), // and looks here
+			vec3( 0, 1, 0 )  // Head is up (set to 0,-1,0 to look upside-down)
 		);
  
 		// Bind our texture in Texture Unit 0
@@ -259,7 +259,7 @@ int main( void )
 		// Index buffer
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, elementbuffer);
 
-		auto lightPos = glm::vec3(4,4,4);
+		auto lightPos = vec3(4,4,4);
 		glUniform3f(LightID, lightPos.x, lightPos.y, lightPos.z);
  
 		{ // Euler
@@ -268,12 +268,12 @@ int main( void )
 			gOrientation1.y += 3.14159f/2.0f * deltaTime;
  
 			// Build the model matrix
-			glm::mat4 RotationMatrix = eulerAngleYXZ(gOrientation1.y, gOrientation1.x, gOrientation1.z);
-			glm::mat4 TranslationMatrix = translate(mat4(), gPosition1); // A bit to the left
-			glm::mat4 ScalingMatrix = scale(mat4(), vec3(1.0f, 1.0f, 1.0f));
-			glm::mat4 ModelMatrix = TranslationMatrix * RotationMatrix * ScalingMatrix;
+			mat4 RotationMatrix = eulerAngleYXZ(gOrientation1.y, gOrientation1.x, gOrientation1.z);
+			mat4 TranslationMatrix = translate(mat4(), gPosition1); // A bit to the left
+			mat4 ScalingMatrix = scale(mat4(), vec3(1.0f, 1.0f, 1.0f));
+			mat4 ModelMatrix = TranslationMatrix * RotationMatrix * ScalingMatrix;
  
-			glm::mat4 MVP = ProjectionMatrix * ViewMatrix * ModelMatrix;
+			mat4 MVP = ProjectionMatrix * ViewMatrix * ModelMatrix;
  
 			// Send our transformation to the currently bound shader, 
 			// in the "MVP" uniform
@@ -306,12 +306,12 @@ int main( void )
 				gOrientation2 = RotateTowards(gOrientation2, targetOrientation, 1.0f*deltaTime);
 			}
  
-			glm::mat4 RotationMatrix = mat4_cast(gOrientation2);
-			glm::mat4 TranslationMatrix = translate(mat4(), gPosition2); // A bit to the right
-			glm::mat4 ScalingMatrix = scale(mat4(), vec3(1.0f, 1.0f, 1.0f));
-			glm::mat4 ModelMatrix = TranslationMatrix * RotationMatrix * ScalingMatrix;
+			mat4 RotationMatrix = mat4_cast(gOrientation2);
+			mat4 TranslationMatrix = translate(mat4(), gPosition2); // A bit to the right
+			mat4 ScalingMatrix = scale(mat4(), vec3(1.0f, 1.0f, 1.0f));
+			mat4 ModelMatrix = TranslationMatrix * RotationMatrix * ScalingMatrix;
  
-			glm::mat4 MVP = ProjectionMatrix * ViewMatrix * ModelMatrix;
+			mat4 MVP = ProjectionMatrix * ViewMatrix * ModelMatrix;
  
 			// Send our transformation to the currently bound shader, 
 			// in the "MVP" uniform

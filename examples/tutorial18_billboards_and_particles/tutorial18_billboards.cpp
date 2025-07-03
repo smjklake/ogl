@@ -168,17 +168,17 @@ int main()
 
 
         computeMatricesFromInputs();
-        glm::mat4 ProjectionMatrix = getProjectionMatrix();
-        glm::mat4 ViewMatrix = getViewMatrix();
+        mat4 ProjectionMatrix = getProjectionMatrix();
+        mat4 ViewMatrix = getViewMatrix();
 
 
 #ifdef DRAW_CUBE
         // Again : this is just Tutorial 4 !
         glDisable(GL_BLEND);
         glUseProgram(cubeProgramID);
-        glm::mat4 cubeModelMatrix(1.0f);
-        cubeModelMatrix = glm::scale(cubeModelMatrix, glm::vec3(0.2f, 0.2f, 0.2f));
-        glm::mat4 cubeMVP = ProjectionMatrix * ViewMatrix * cubeModelMatrix;
+        mat4 cubeModelMatrix(1.0f);
+        cubeModelMatrix = scale(cubeModelMatrix, vec3(0.2f, 0.2f, 0.2f));
+        mat4 cubeMVP = ProjectionMatrix * ViewMatrix * cubeModelMatrix;
         glUniformMatrix4fv(cubeMatrixID, 1, GL_FALSE, &cubeMVP[0][0]);
         glEnableVertexAttribArray(0);
         glBindBuffer(GL_ARRAY_BUFFER, cubevertexbuffer);
@@ -192,13 +192,13 @@ int main()
 #endif
 
 
-        // We will need the camera's position in order to sort the particles
+        // We will need the camera's position to sort the particles
         // w.r.t the camera's distance.
         // There should be a getCameraPosition() function in common/controls.cpp,
         // but this works too.
-        // glm::vec3 CameraPosition(glm::inverse(ViewMatrix)[3]);
+        // Glm::vec3 CameraPosition(glm::inverse(ViewMatrix)[3]);
 
-        glm::mat4 ViewProjectionMatrix = ProjectionMatrix * ViewMatrix;
+        mat4 ViewProjectionMatrix = ProjectionMatrix * ViewMatrix;
 
 
         glEnable(GL_BLEND);
@@ -217,7 +217,7 @@ int main()
         // This is equivalent to multiplying (1,0,0) and (0,1,0) by inverse(ViewMatrix).
         // ViewMatrix is orthogonal (it was made this way),
         // so its inverse is also its transpose,
-        // and transposing a matrix is "free" (inversing is slooow)
+        // and transposing a matrix is "free" (inversing is slow)
         glUniform3f(CameraRight_worldspace_ID, ViewMatrix[0][0], ViewMatrix[1][0], ViewMatrix[2][0]);
         glUniform3f(CameraUp_worldspace_ID, ViewMatrix[0][1], ViewMatrix[1][1], ViewMatrix[2][1]);
 
@@ -234,7 +234,7 @@ int main()
         glEnableVertexAttribArray(0);
         glBindBuffer(GL_ARRAY_BUFFER, billboard_vertex_buffer);
         glVertexAttribPointer(
-            0, // attribute. No particular reason for 0, but must match the layout in the shader.
+            0, // Attribute. No particular reason for 0, but must match the layout in the shader.
             3, // size
             GL_FLOAT, // type
             GL_FALSE, // normalized?

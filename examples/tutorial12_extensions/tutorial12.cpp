@@ -23,8 +23,8 @@ using namespace glm;
 
 // The ARB_debug_output extension, which is used in this tutorial as an example,
 // can call a function of ours with error messages.
-// This function must have this precise prototype ( parameters and return value )
-// See http://www.opengl.org/registry/specs/ARB/debug_output.txt , "New Types" : 
+// This function must have this precise prototype (parameters and return value)
+// See http://www.opengl.org/registry/specs/ARB/debug_output.txt , "New Types":
 //	The callback function that applications can define, and
 //	is accepted by DebugMessageCallbackARB, is defined as:
 //	
@@ -57,13 +57,13 @@ void APIENTRY DebugOutputCallback(const GLenum source, const GLenum type, GLuint
 	else if(severity == GL_DEBUG_SEVERITY_MEDIUM_ARB)		printf("Severity : MEDIUM; ");
 	else if(severity == GL_DEBUG_SEVERITY_LOW_ARB)			printf("Severity : LOW; ");
 
-	// You can set a breakpoint here ! Your debugger will stop the program,
+	// You can set a breakpoint here! Your debugger will stop the program,
 	// and the callstack will immediately show you the offending call.
 	printf("Message : %s\n", message);
 }
 
 
-int main( void )
+int main()
 {
 	// Initialize GLFW
 	if( !glfwInit() )
@@ -81,7 +81,7 @@ int main( void )
 
 	// ARB_debug_output is a bit special, 
 	// it requires creating the OpenGL context
-	// with paticular flags.
+	// with particular flags.
 	// GLFW exposes it this way; if you use SDL, SFML, freeGLUT
 	// or other, check the documentation.
 	// If you use custom code, read the spec : 
@@ -109,9 +109,9 @@ int main( void )
 
 	// Example 1 :
 	if ( GLEW_AMD_seamless_cubemap_per_texture ){
-		printf("The GL_AMD_seamless_cubemap_per_texture is present, (but we're not goint to use it)\n");
+		printf("The GL_AMD_seamless_cubemap_per_texture is present, (but we're not going to use it)\n");
 		// Now it's legal to call glTexParameterf with the TEXTURE_CUBE_MAP_SEAMLESS_ARB parameter
-		// You HAVE to test this, because obviously, this code would fail on non-AMD hardware.
+		// You HAVE to test this, because this code would fail on non-AMD hardware.
 	}
 
 	// Example 2 :
@@ -137,12 +137,12 @@ int main( void )
 	glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
 
 	// Enable depth test
-	glEnable(GL_DEPTH); // SHOULD BE GL_DEPTH_TEST ! WILL TRIGGER AN ERROR MESSAGE !
-	// Accept fragment if it is closer to the camera than the former one
-	glDepthFunc(GL_LEFT);  // SHOULD BE GL_LESS ! WILL TRIGGER AN ERROR MESSAGE !
+	glEnable(GL_DEPTH); // SHOULD BE GL_DEPTH_TEST! WILL TRIGGER AN ERROR MESSAGE!
+	// Accept a fragment if it is closer to the camera than the former one
+	glDepthFunc(GL_LEFT);  // SHOULD BE GL_LESS! WILL TRIGGER AN ERROR MESSAGE!
 
 	// Cull triangles which normal is not towards the camera
-	glEnable(GL_CULL_FACE_MODE); // SHOULD BE GL_CULL_FACE ! WILL TRIGGER AN ERROR MESSAGE !
+	glEnable(GL_CULL_FACE_MODE); // SHOULD BE GL_CULL_FACE! WILL TRIGGER AN ERROR MESSAGE!
 
 	GLuint VertexArrayID;
 	glGenVertexArrays(1, &VertexArrayID);

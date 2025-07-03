@@ -21,15 +21,15 @@ using namespace glm;
 // CPU representation of a particle
 struct Particle
 {
-    glm::vec3 pos, speed;
+    vec3 pos, speed;
     unsigned char r, g, b, a; // Color
     float size, angle, weight;
-    float life; // Remaining life of the particle. if <0 : dead and unused.
-    float cameradistance; // *Squared* distance to the camera. if dead : -1.0f
+    float life; // Remaining life of the particle. If <0: dead and unused.
+    float cameradistance; // *Squared* distance to the camera. if dead: -1.0f
 
     bool operator<(const Particle& that) const
     {
-        // Sort in reverse order : far particles drawn first.
+        // Sort in reverse order: far particles drawn first.
         return this->cameradistance > that.cameradistance;
     }
 };
@@ -69,7 +69,7 @@ void SortParticles()
     std::sort(&ParticlesContainer[0], &ParticlesContainer[MaxParticles]);
 }
 
-int main(void)
+int main()
 {
     // Initialize GLFW
     if (!glfwInit())
@@ -204,20 +204,20 @@ int main(void)
 
 
         computeMatricesFromInputs();
-        glm::mat4 ProjectionMatrix = getProjectionMatrix();
-        glm::mat4 ViewMatrix = getViewMatrix();
+        mat4 ProjectionMatrix = getProjectionMatrix();
+        mat4 ViewMatrix = getViewMatrix();
 
-        // We will need the camera's position in order to sort the particles
+        // We will need the camera's position to sort the particles
         // w.r.t the camera's distance.
         // There should be a getCameraPosition() function in common/controls.cpp,
         // but this works too.
-        glm::vec3 CameraPosition(glm::inverse(ViewMatrix)[3]);
+        vec3 CameraPosition(inverse(ViewMatrix)[3]);
 
-        glm::mat4 ViewProjectionMatrix = ProjectionMatrix * ViewMatrix;
+        mat4 ViewProjectionMatrix = ProjectionMatrix * ViewMatrix;
 
 
-        // Generate 10 new particle each millisecond,
-        // but limit this to 16 ms (60 fps), or if you have 1 long frame (1sec),
+        // Generate 10 new particles each millisecond,
+        // but limit this to 16 ms (60 fps), or if you have 1 long frame (1 sec),
         // new particles will be huge and the next frame even longer.
         int newparticles = static_cast<int>(delta * 10000.0);
         if (newparticles > static_cast<int>(0.016f * 10000.0))
@@ -227,14 +227,14 @@ int main(void)
         {
             const int particleIndex = FindUnusedParticle();
             ParticlesContainer[particleIndex].life = 5.0f; // This particle will live 5 seconds.
-            ParticlesContainer[particleIndex].pos = glm::vec3(0, 0, -20.0f);
+            ParticlesContainer[particleIndex].pos = vec3(0, 0, -20.0f);
 
             float spread = 1.5f;
-            auto maindir = glm::vec3(0.0f, 10.0f, 0.0f);
+            auto maindir = vec3(0.0f, 10.0f, 0.0f);
             // Very bad way to generate a random direction;
-            // See for instance http://stackoverflow.com/questions/5408276/python-uniform-spherical-distribution instead,
-            // combined with some user-controlled parameters (main direction, spread, etc)
-            auto randomdir = glm::vec3(
+            // See, for instance, http://stackoverflow.com/questions/5408276/python-uniform-spherical-distribution instead,
+            // combined with some user-controlled parameters (main direction, spread, etc.)
+            auto randomdir = vec3(
                 (rand() % 2000 - 1000.0f) / 1000.0f,
                 (rand() % 2000 - 1000.0f) / 1000.0f,
                 (rand() % 2000 - 1000.0f) / 1000.0f
@@ -264,9 +264,9 @@ int main(void)
                 if (p.life > 0.0f)
                 {
                     // Simulate simple physics : gravity only, no collisions
-                    p.speed += glm::vec3(0.0f, -9.81f, 0.0f) * static_cast<float>(delta) * 0.5f;
+                    p.speed += vec3(0.0f, -9.81f, 0.0f) * static_cast<float>(delta) * 0.5f;
                     p.pos += p.speed * static_cast<float>(delta);
-                    p.cameradistance = glm::length2(p.pos - CameraPosition);
+                    p.cameradistance = length2(p.pos - CameraPosition);
                     //ParticlesContainer[i].pos += glm::vec3(0.0f,10.0f, 0.0f) * (float)delta;
 
                     // Fill the GPU buffer
@@ -333,7 +333,7 @@ int main(void)
         glEnableVertexAttribArray(0);
         glBindBuffer(GL_ARRAY_BUFFER, billboard_vertex_buffer);
         glVertexAttribPointer(
-            0, // attribute. No particular reason for 0, but must match the layout in the shader.
+            0, // Attribute. No particular reason for 0, but must match the layout in the shader.
             3, // size
             GL_FLOAT, // type
             GL_FALSE, // normalized?
@@ -342,11 +342,11 @@ int main(void)
             ) // array buffer offset
         );
 
-        // 2nd attribute buffer : positions of particles' centers
+        // 2nd attribute buffer: positions of particles' centers
         glEnableVertexAttribArray(1);
         glBindBuffer(GL_ARRAY_BUFFER, particles_position_buffer);
         glVertexAttribPointer(
-            1, // attribute. No particular reason for 1, but must match the layout in the shader.
+            1, // Attribute. No particular reason for 1, but must match the layout in the shader.
             4, // size : x + y + z + size => 4
             GL_FLOAT, // type
             GL_FALSE, // normalized?
@@ -359,7 +359,7 @@ int main(void)
         glEnableVertexAttribArray(2);
         glBindBuffer(GL_ARRAY_BUFFER, particles_color_buffer);
         glVertexAttribPointer(
-            2, // attribute. No particular reason for 1, but must match the layout in the shader.
+            2, // Attribute. No particular reason for 1, but must match the layout in the shader.
             4, // size : r + g + b + a => 4
             GL_UNSIGNED_BYTE, // type
             GL_TRUE,
