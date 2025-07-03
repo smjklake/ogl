@@ -3,6 +3,7 @@
     <words>
       <w>anttweakbar</w>
       <w>berglund</w>
+      <w>bposition</w>
       <w>broadphase</w>
       <w>cameradistance</w>
       <w>cameraspace</w>
@@ -13,8 +14,10 @@
       <w>glvnd</w>
       <w>homoneneousspace</w>
       <w>imagepath</w>
+      <w>invs</w>
       <w>maindir</w>
       <w>matrixf</w>
+      <w>melax's</w>
       <w>memcpy's</w>
       <w>modelview</w>
       <w>motionstate</w>
@@ -29,6 +32,7 @@
       <w>rigidbodies</w>
       <w>rpavlik</w>
       <w>shadowmaps</w>
+      <w>slerp</w>
       <w>tangentspace</w>
       <w>thickwalls</w>
       <w>usemtl</w>
@@ -38,8 +42,14 @@
       <w>vertexbuffer</w>
       <w>vertexshader</w>
       <w>worldspace</w>
+      <w>xaxis</w>
+      <w>xneg</w>
       <w>xyzs</w>
+      <w>yneg</w>
       <w>ypos</w>
+      <w>zaxis</w>
+      <w>zneg</w>
+      <w>zpos</w>
     </words>
   </dictionary>
 </component>

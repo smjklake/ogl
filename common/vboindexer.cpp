@@ -95,7 +95,7 @@ struct PackedVertex
     bool operator<(const PackedVertex that) const
     {
         return memcmp(this, &that, sizeof(PackedVertex)) > 0;
-    };
+    }
 };
 
 bool getSimilarVertexIndex_fast(

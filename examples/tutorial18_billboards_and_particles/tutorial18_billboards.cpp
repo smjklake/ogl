@@ -156,7 +156,7 @@ int main()
     glBufferData(GL_ARRAY_BUFFER, sizeof(g_cube_color_buffer_data), g_cube_color_buffer_data, GL_DYNAMIC_DRAW);
 #endif
 
-    double lastTime = glfwGetTime();
+    // double lastTime = glfwGetTime();
     do
     {
         // Clear the screen
@@ -164,7 +164,7 @@ int main()
 
         const double currentTime = glfwGetTime();
         // double delta = currentTime - lastTime;
-        lastTime = currentTime;
+        // lastTime = currentTime;
 
 
         computeMatricesFromInputs();

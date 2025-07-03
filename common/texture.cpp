@@ -41,13 +41,13 @@ GLuint loadBMP_custom(const char* imagepath)
         return 0;
     }
     // Make sure this is a 24bpp file
-    if (*reinterpret_cast<int*>(&(header[0x1E])) != 0)
+    if (*reinterpret_cast<int*>(&header[0x1E]) != 0)
     {
         printf("Not a correct BMP file\n");
         fclose(file);
         return 0;
     }
-    if (*reinterpret_cast<int*>(&(header[0x1C])) != 24)
+    if (*reinterpret_cast<int*>(&header[0x1C]) != 24)
     {
         printf("Not a correct BMP file\n");
         fclose(file);
@@ -56,9 +56,9 @@ GLuint loadBMP_custom(const char* imagepath)
 
     // Read the information about the image
     // unsigned int dataPos = *reinterpret_cast<int*>(&(header[0x0A]));
-    unsigned int imageSize = *reinterpret_cast<int*>(&(header[0x22]));
-    const unsigned int width = *reinterpret_cast<int*>(&(header[0x12]));
-    const unsigned int height = *reinterpret_cast<int*>(&(header[0x16]));
+    unsigned int imageSize = *reinterpret_cast<int*>(&header[0x22]);
+    const unsigned int width = *reinterpret_cast<int*>(&header[0x12]);
+    const unsigned int height = *reinterpret_cast<int*>(&header[0x16]);
 
     // Some BMP files are misformatted, guess missing information
     if (imageSize == 0) imageSize = width * height * 3; // 3: one byte for each Red, Green and Blue component
@@ -157,11 +157,11 @@ GLuint loadDDS(const char* imagepath)
     /* get the surface desc */
     fread(&header, 124, 1, fp);
 
-    unsigned int height = *reinterpret_cast<unsigned int*>(&(header[8]));
-    unsigned int width = *reinterpret_cast<unsigned int*>(&(header[12]));
-    const unsigned int linearSize = *reinterpret_cast<unsigned int*>(&(header[16]));
-    const unsigned int mipMapCount = *reinterpret_cast<unsigned int*>(&(header[24]));
-    const unsigned int fourCC = *reinterpret_cast<unsigned int*>(&(header[80]));
+    unsigned int height = *reinterpret_cast<unsigned int*>(&header[8]);
+    unsigned int width = *reinterpret_cast<unsigned int*>(&header[12]);
+    const unsigned int linearSize = *reinterpret_cast<unsigned int*>(&header[16]);
+    const unsigned int mipMapCount = *reinterpret_cast<unsigned int*>(&header[24]);
+    const unsigned int fourCC = *reinterpret_cast<unsigned int*>(&header[80]);
 
 
     /* how big is it going to be including all mipmaps? */
@@ -197,13 +197,13 @@ GLuint loadDDS(const char* imagepath)
     glBindTexture(GL_TEXTURE_2D, textureID);
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
-    const unsigned int blockSize = (format == GL_COMPRESSED_RGBA_S3TC_DXT1_EXT) ? 8 : 16;
+    const unsigned int blockSize = format == GL_COMPRESSED_RGBA_S3TC_DXT1_EXT ? 8 : 16;
     unsigned int offset = 0;
 
     /* load the mipmaps */
     for (unsigned int level = 0; level < mipMapCount && (width || height); ++level)
     {
-        const unsigned int size = ((width + 3) / 4) * ((height + 3) / 4) * blockSize;
+        const unsigned int size = (width + 3) / 4 * ((height + 3) / 4) * blockSize;
         glCompressedTexImage2D(GL_TEXTURE_2D, level, format, width, height,
                                0, size, buffer + offset);
 

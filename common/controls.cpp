@@ -10,22 +10,22 @@ using namespace glm;
 
 #include "controls.hpp"
 
-glm::mat4 ViewMatrix;
-glm::mat4 ProjectionMatrix;
+mat4 ViewMatrix;
+mat4 ProjectionMatrix;
 
-glm::mat4 getViewMatrix()
+mat4 getViewMatrix()
 {
     return ViewMatrix;
 }
 
-glm::mat4 getProjectionMatrix()
+mat4 getProjectionMatrix()
 {
     return ProjectionMatrix;
 }
 
 
 // Initial position: on +Z
-auto position = glm::vec3(0, 0, 5);
+auto position = vec3(0, 0, 5);
 // Initial horizontal angle: toward -Z
 float horizontalAngle = 3.14f;
 // Initial vertical angle : none
@@ -58,21 +58,21 @@ void computeMatricesFromInputs()
     verticalAngle += mouseSpeed * static_cast<float>(768.0f / 2 - ypos);
 
     // Direction: Spherical coordinates to Cartesian coordinates conversion
-    const glm::vec3 direction(
+    const vec3 direction(
         cos(verticalAngle) * sin(horizontalAngle),
         sin(verticalAngle),
         cos(verticalAngle) * cos(horizontalAngle)
     );
 
     // Right vector
-    const auto right = glm::vec3(
+    const auto right = vec3(
         sin(horizontalAngle - 3.14f / 2.0f),
         0,
         cos(horizontalAngle - 3.14f / 2.0f)
     );
 
     // Up vector
-    const glm::vec3 up = glm::cross(right, direction);
+    const vec3 up = cross(right, direction);
 
     // Move forward
     if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
@@ -99,9 +99,9 @@ void computeMatricesFromInputs()
     // - 5 * glfwGetMouseWheel(); // Now GLFW 3 requires setting up a callback for this. It's a bit too complicated for this beginner's tutorial, so it's disabled instead.
 
     // Projection matrix: 45� Field of View, 4:3 ratio, display range: 0.1 unit <-> 100 units
-    ProjectionMatrix = glm::perspective(glm::radians(FoV), 4.0f / 3.0f, 0.1f, 100.0f);
+    ProjectionMatrix = perspective(radians(FoV), 4.0f / 3.0f, 0.1f, 100.0f);
     // Camera matrix
-    ViewMatrix = glm::lookAt(
+    ViewMatrix = lookAt(
         position, // Camera is here
         position + direction, // and looks here: at the same position, plus "direction"
         up // Head is up (set to 0,-1,0 to look upside-down)

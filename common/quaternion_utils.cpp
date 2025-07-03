@@ -16,7 +16,7 @@ quat RotationBetweenVectors(vec3 start, vec3 dest){
 	vec3 rotationAxis;
 
 	if (cosTheta < -1 + 0.001f){
-		// special case when vectors in opposite directions :
+		// special case when vectors in opposite directions:
 		// there is no "ideal" rotation axis
 		// So guess one; any will do as long as it's perpendicular to start
 		// This implementation favors a rotation around the Up axis,
@@ -26,7 +26,7 @@ quat RotationBetweenVectors(vec3 start, vec3 dest){
 			rotationAxis = cross(vec3(1.0f, 0.0f, 0.0f), start);
 
 		rotationAxis = normalize(rotationAxis);
-		return angleAxis(glm::radians(180.0f), rotationAxis);
+		return angleAxis(radians(180.0f), rotationAxis);
 	}
 
 	// Implementation from Stan Melax's Game Programming Gems 1 article
@@ -48,9 +48,9 @@ quat RotationBetweenVectors(vec3 start, vec3 dest){
 
 
 // Returns a quaternion that will make your object looking towards 'direction'.
-// Similar to RotationBetweenVectors, but also controls the vertical orientation.
+// Similar to RotationBetweenVectors but also controls the vertical orientation.
 // This assumes that at rest, the object faces +Z.
-// Beware, the first parameter is a direction, not the target point !
+// Beware, the first parameter is a direction, not the target point!
 quat LookAt(const vec3 direction, vec3 desiredUp){
 
 	if (length2(direction) < 0.0001f )
@@ -65,7 +65,7 @@ quat LookAt(const vec3 direction, vec3 desiredUp){
 	// but this depends on your model) and the desired direction
 	const quat rot1 = RotationBetweenVectors(vec3(0.0f, 0.0f, 1.0f), direction);
 	// Because of the 1rst rotation, the up is probably completely screwed up.
-	// Find the rotation between the "up" of the rotated object, and the desired up
+	// Find the rotation between the "up" of the rotated object and the desired up
 	const vec3 newUp = rot1 * vec3(0.0f, 1.0f, 0.0f);
 	const quat rot2 = RotationBetweenVectors(newUp, desiredUp);
 
@@ -86,7 +86,7 @@ quat RotateTowards(quat q1, const quat q2, const float maxAngle){
 
 	float cosTheta = dot(q1, q2);
 
-	// q1 and q2 are already equal.
+	// Q1 and q2 are already equal.
 	// Force q2 just to be sure
 	if(cosTheta > 0.9999f){
 		return q2;
@@ -137,27 +137,27 @@ quat RotateTowards(quat q1, const quat q2, const float maxAngle){
 
 void tests(){
 
-	glm::vec3 Xpos(+1.0f,  0.0f,  0.0f);
-	glm::vec3 Ypos( 0.0f, +1.0f,  0.0f);
-	glm::vec3 Zpos( 0.0f,  0.0f, +1.0f);
-	glm::vec3 Xneg(-1.0f,  0.0f,  0.0f);
-	glm::vec3 Yneg( 0.0f, -1.0f,  0.0f);
-	glm::vec3 Zneg( 0.0f,  0.0f, -1.0f);
+	// glm::vec3 Xpos(+1.0f,  0.0f,  0.0f);
+	// glm::vec3 Ypos( 0.0f, +1.0f,  0.0f);
+	// glm::vec3 Zpos( 0.0f,  0.0f, +1.0f);
+	// glm::vec3 Xneg(-1.0f,  0.0f,  0.0f);
+	// glm::vec3 Yneg( 0.0f, -1.0f,  0.0f);
+	// glm::vec3 Zneg( 0.0f,  0.0f, -1.0f);
 
 	// Testing standard, easy case
-	// Must be 90� rotation on X : 0.7 0 0 0.7
+	// Must be 90� rotations on X: 0.7 0 0 0.7
 	// quat X90rot = RotationBetweenVectors(Ypos, Zpos);
 
 	// Testing with v1 = v2
-	// Must be identity : 0 0 0 1
+	// Must be an identity: 0 0 0 1
 	// quat id = RotationBetweenVectors(Xpos, Xpos);
 
 	// Testing with v1 = -v2
-	// Must be 180� on +/-Y axis : 0 +/-1 0 0
+	// Must be 180� on +/-Y axis: 0 +/-1 0 0
 	// quat Y180rot = RotationBetweenVectors(Xpos, Xneg);
 
 	// Testing with v1 = -v2, but with a "bad first guess"
-	// Must be 180� on +/-Y axis : 0 +/-1 0 0
+	// Must be 180� on +/-Y axis: 0 +/-1 0 0
 	// quat X180rot = RotationBetweenVectors(Zpos, Zneg);
 
 
